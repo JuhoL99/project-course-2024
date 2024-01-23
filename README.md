@@ -1,2 +1,2 @@
 # project-course-2024
-Yeehaw
+TUAS Game project by group 6

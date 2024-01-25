@@ -19,10 +19,6 @@ public class PlayerMovementManager : MonoBehaviour
     {
         player = GetComponent<PlayerManager>();
     }
-    void Start()
-    {
-        
-    }
     void Update()
     {
         GroundMovement();

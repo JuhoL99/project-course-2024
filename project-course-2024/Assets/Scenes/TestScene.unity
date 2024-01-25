@@ -314,12 +314,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144400160}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -250, y: 0, z: -250}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 969464526}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &144400164
 MonoBehaviour:
@@ -919,6 +919,7 @@ Transform:
   - {fileID: 1032440435}
   - {fileID: 852090085}
   - {fileID: 1967729598}
+  - {fileID: 1755400917}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &471056051
@@ -2193,7 +2194,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 144400163}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &983405535
@@ -3977,7 +3979,7 @@ GameObject:
   - component: {fileID: 1755400914}
   - component: {fileID: 1755400918}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: MainTarget
   m_TagString: MainTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4062,12 +4064,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1755400913}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -13.5}
   m_LocalScale: {x: 0.8, y: 2, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 468203168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!208 &1755400918
 NavMeshObstacle:
@@ -5122,8 +5124,6 @@ SceneRoots:
   - {fileID: 431915195}
   - {fileID: 1406153173}
   - {fileID: 9108640866913144319}
-  - {fileID: 144400163}
-  - {fileID: 1755400917}
   - {fileID: 2302353254166716171}
   - {fileID: 1927166206279130252}
   - {fileID: 1401530751}

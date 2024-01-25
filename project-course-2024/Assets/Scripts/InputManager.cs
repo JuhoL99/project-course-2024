@@ -13,7 +13,6 @@ public class InputManager : MonoBehaviour
     public float horizontalInput;
     public float verticalInput;
 
-
     private void Awake()
     {
         if (instance == null)

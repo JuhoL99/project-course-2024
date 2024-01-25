@@ -18,14 +18,6 @@ public class NavMeshManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Start()
-    {
-
-    }
-    void Update()
-    {
-        
-    }
     public void RebakeNavMesh()
     {
         terrain.BuildNavMesh();

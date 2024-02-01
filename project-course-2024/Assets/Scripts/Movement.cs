@@ -14,12 +14,14 @@ public class Movement : MonoBehaviour
     Vector2 moveDir2;
     Vector3 moveDir3;
 
-    bool moving;
+    bool walkInputting;
+    float ySpeed;
+    float groundedGravity = 0.1f;
 
-    public float baseMoveSpeed;
+    [Min(0f)] public float baseMoveSpeed, baseJumpHeight, playerGravity;
     [Range(0,1)] public float turnLerpSpeed;
 
-    void Start()
+    void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
         cam = Camera.main.transform;
@@ -28,33 +30,47 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        UpdateMoveDir();
-        Move();
+        UpdateHorizontalMoveDir();
+        CCMove();
     }
-    void Move()
+    void CCMove()
     {
-        if (!moving) return;
-        cc.Move(moveDir3 * baseMoveSpeed * Time.deltaTime);
+        ySpeed -= playerGravity * Time.deltaTime;
+        moveDir3 *= baseMoveSpeed;
+        moveDir3.y = ySpeed;
+        cc.Move(new Vector3(moveDir2.x*baseMoveSpeed,ySpeed,moveDir2.y*baseMoveSpeed)  * Time.deltaTime);
     }
     public void OnWalk(InputAction.CallbackContext ctx)
     {
         input = ctx.ReadValue<Vector2>();
         if (input.magnitude < 0.01f)
         {
-            moving = false;
+            walkInputting = false;
             return;
         }
-        moving = true;
-        
+        walkInputting = true;
     }
-    void UpdateMoveDir()
+
+    public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (!moving) return;
-        float inputAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
-        float camAngle = -cam.rotation.eulerAngles.y;
-        float moveAngle = (inputAngle + camAngle) % 360;
-        moveDir2 = new Vector2(Mathf.Cos(moveAngle * Mathf.Deg2Rad), Mathf.Sin(moveAngle * Mathf.Deg2Rad));
-        moveDir3 = new Vector3(moveDir2.x, 0f, moveDir2.y);
-        transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(transform.rotation.eulerAngles.y,180-moveAngle,turnLerpSpeed), 0);
+        if (!(ctx.performed && cc.isGrounded)) return;
+        ySpeed = Mathf.Sqrt(2 * playerGravity * baseJumpHeight);
+    }
+    void UpdateHorizontalMoveDir()
+    {
+        if (walkInputting)
+        {
+            float inputAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
+            float camAngle = -cam.rotation.eulerAngles.y;
+            float moveAngle = (inputAngle + camAngle) % 360;
+            moveDir2 = new Vector2(Mathf.Cos(moveAngle * Mathf.Deg2Rad), Mathf.Sin(moveAngle * Mathf.Deg2Rad));
+            moveDir3 = new Vector3(moveDir2.x, 0f, moveDir2.y);
+            transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(transform.rotation.eulerAngles.y, 180 - moveAngle, turnLerpSpeed), 0);
+        }
+        else
+        {
+            moveDir2 = Vector2.zero;
+            moveDir3 = Vector3.zero;
+        }
     }
 }

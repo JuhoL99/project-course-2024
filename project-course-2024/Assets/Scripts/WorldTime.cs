@@ -45,11 +45,6 @@ public class WorldTime : MonoBehaviour
         timeFraction = currentTime / dayLength;
         TimeConversion(timeFraction);
         timeOfDay = Mathf.Clamp01(currentTime / dayLength) * 24;
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CheckNightState();
-        }
     }
     private void TimeConversion(float timeFraction)
     {
@@ -57,9 +52,5 @@ public class WorldTime : MonoBehaviour
         hour = (int)(secondsPassed / 3600);
         minute = (int)((secondsPassed % 3600) / 60);
         second = (int)(secondsPassed % 60);
-    }
-    public void CheckNightState()
-    {
-        Debug.Log("test");
     }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 24223492386615030}
   - component: {fileID: 807983106974727042}
   - component: {fileID: 501513025520350122}
+  - component: {fileID: 8236519743458253987}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -216,6 +217,19 @@ MonoBehaviour:
   baseJumpHeight: 3
   playerGravity: 30
   turnLerpSpeed: 0.1
+--- !u!114 &8236519743458253987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113995292624435506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d48e0528e35d7bd43b4109056bffae0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aWall: {fileID: 3530987246762088181, guid: f56f25c1a78f4d049beb87df0b3d08a5, type: 3}
 --- !u!1 &225130368106103104
 GameObject:
   m_ObjectHideFlags: 0

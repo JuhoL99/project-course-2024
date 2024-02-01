@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1406153172}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2625,8 +2625,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 986126243}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.127444, y: 0.80979216, z: -0.5398614, w: -0.19116603}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.12744401, y: 0.8097921, z: -0.5398614, w: -0.19116603}
+  m_LocalPosition: {x: 0, y: 0.0000009536743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4069,7 +4069,7 @@ Transform:
   m_GameObject: {fileID: 1434820612}
   serializedVersion: 2
   m_LocalRotation: {x: -0.120415784, y: 0.82886815, z: -0.5100894, w: -0.19566923}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0000009536743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5136,9 +5136,9 @@ MonoBehaviour:
   m_YAxis:
     Value: 1.94
     m_SpeedMode: 0
-    m_MaxSpeed: 3
+    m_MaxSpeed: 30
     m_AccelTime: 0.1
-    m_DecelTime: 0.05
+    m_DecelTime: 0.02
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
     m_InvertInput: 1
@@ -5160,9 +5160,9 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 200
-    m_AccelTime: 0.05
-    m_DecelTime: 0.05
+    m_MaxSpeed: 2000
+    m_AccelTime: 0.1
+    m_DecelTime: 0.02
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
     m_InvertInput: 0
@@ -5288,8 +5288,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1822317247}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.12394573, y: 0.819478, z: -0.52504236, w: -0.19345255}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.123945646, y: 0.81947803, z: -0.52504236, w: -0.19345248}
+  m_LocalPosition: {x: 0, y: 0.0000009536743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -49,7 +49,7 @@ MonoBehaviour:
   timeOfDay: 0
   daysPassed: 0
   timeFraction: 0
-  dayLength: 10
+  dayLength: 150
   hour: 0
   minute: 0
   second: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
     key0: {r: 0, g: 0.035220064, b: 0.18490559, a: 1}
     key1: {r: 1, g: 1, b: 1, a: 1}
     key2: {r: 1, g: 1, b: 1, a: 0}
-    key3: {r: 0.5320754, g: 0.19348197, b: 0, a: 0}
+    key3: {r: 0.4943396, g: 0.12814274, b: 0, a: 0}
     key4: {r: 0, g: 0.03529412, b: 0.1882353, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}

@@ -9,11 +9,15 @@ public class Movement : MonoBehaviour
 {
     Transform cam;
     CharacterController cc;
-    bool moving;
+
+    Vector2 input;
     Vector2 moveDir2;
     Vector3 moveDir3;
+
+    bool moving;
+
     public float baseMoveSpeed;
-    Vector2 input;
+    [Range(0,1)] public float turnLerpSpeed;
 
     void Start()
     {
@@ -51,6 +55,6 @@ public class Movement : MonoBehaviour
         float moveAngle = (inputAngle + camAngle) % 360;
         moveDir2 = new Vector2(Mathf.Cos(moveAngle * Mathf.Deg2Rad), Mathf.Sin(moveAngle * Mathf.Deg2Rad));
         moveDir3 = new Vector3(moveDir2.x, 0f, moveDir2.y);
-        transform.rotation = Quaternion.Euler(0, -moveAngle + 180, 0);
+        transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(transform.rotation.eulerAngles.y,180-moveAngle,turnLerpSpeed), 0);
     }
 }

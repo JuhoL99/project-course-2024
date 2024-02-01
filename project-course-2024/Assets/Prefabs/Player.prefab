@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMoveSpeed: 10
+  turnLerpSpeed: 0.1
 --- !u!114 &807983106974727042
 MonoBehaviour:
   m_ObjectHideFlags: 0

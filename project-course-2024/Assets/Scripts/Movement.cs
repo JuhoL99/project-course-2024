@@ -65,7 +65,7 @@ public class Movement : MonoBehaviour
             float moveAngle = (inputAngle + camAngle) % 360;
             moveDir2 = new Vector2(Mathf.Cos(moveAngle * Mathf.Deg2Rad), Mathf.Sin(moveAngle * Mathf.Deg2Rad));
             moveDir3 = new Vector3(moveDir2.x, 0f, moveDir2.y);
-            transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(transform.rotation.eulerAngles.y, 180 - moveAngle, turnLerpSpeed), 0);
+            transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(transform.rotation.eulerAngles.y, 90 - moveAngle, turnLerpSpeed), 0);
         }
         else
         {

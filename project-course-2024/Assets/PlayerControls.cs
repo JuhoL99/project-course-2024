@@ -62,6 +62,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CycleBuildBlocks"",
+                    ""type"": ""Value"",
+                    ""id"": ""f1cc185f-798a-4a4f-b588-d46f384dba8f"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b72ee1da-49fd-48fe-979d-f351f2e2f22e"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleBuildBlocks"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerMovement_Jump = m_PlayerMovement.FindAction("Jump", throwIfNotFound: true);
         m_PlayerMovement_Fire = m_PlayerMovement.FindAction("Fire", throwIfNotFound: true);
         m_PlayerMovement_Build = m_PlayerMovement.FindAction("Build", throwIfNotFound: true);
+        m_PlayerMovement_CycleBuildBlocks = m_PlayerMovement.FindAction("CycleBuildBlocks", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +250,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Jump;
     private readonly InputAction m_PlayerMovement_Fire;
     private readonly InputAction m_PlayerMovement_Build;
+    private readonly InputAction m_PlayerMovement_CycleBuildBlocks;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -237,6 +259,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerMovement_Jump;
         public InputAction @Fire => m_Wrapper.m_PlayerMovement_Fire;
         public InputAction @Build => m_Wrapper.m_PlayerMovement_Build;
+        public InputAction @CycleBuildBlocks => m_Wrapper.m_PlayerMovement_CycleBuildBlocks;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +281,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Build.started += instance.OnBuild;
             @Build.performed += instance.OnBuild;
             @Build.canceled += instance.OnBuild;
+            @CycleBuildBlocks.started += instance.OnCycleBuildBlocks;
+            @CycleBuildBlocks.performed += instance.OnCycleBuildBlocks;
+            @CycleBuildBlocks.canceled += instance.OnCycleBuildBlocks;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -274,6 +300,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Build.started -= instance.OnBuild;
             @Build.performed -= instance.OnBuild;
             @Build.canceled -= instance.OnBuild;
+            @CycleBuildBlocks.started -= instance.OnCycleBuildBlocks;
+            @CycleBuildBlocks.performed -= instance.OnCycleBuildBlocks;
+            @CycleBuildBlocks.canceled -= instance.OnCycleBuildBlocks;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -297,5 +326,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnBuild(InputAction.CallbackContext context);
+        void OnCycleBuildBlocks(InputAction.CallbackContext context);
     }
 }

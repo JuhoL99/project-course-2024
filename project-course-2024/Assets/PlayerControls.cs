@@ -71,6 +71,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CycleBuildRotation"",
+                    ""type"": ""Value"",
+                    ""id"": ""20995f29-a7f6-4e2e-8b4a-29f561b4a2ca"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""CycleBuildBlocks"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""0fd7ff89-cbc0-454d-9414-653708ba73e6"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleBuildRotation"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""5046e291-9f9e-40f5-adac-cdb872da9947"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleBuildRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""201d9827-f200-4732-ad87-38f7abc5741f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleBuildRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -185,6 +227,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerMovement_Fire = m_PlayerMovement.FindAction("Fire", throwIfNotFound: true);
         m_PlayerMovement_Build = m_PlayerMovement.FindAction("Build", throwIfNotFound: true);
         m_PlayerMovement_CycleBuildBlocks = m_PlayerMovement.FindAction("CycleBuildBlocks", throwIfNotFound: true);
+        m_PlayerMovement_CycleBuildRotation = m_PlayerMovement.FindAction("CycleBuildRotation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -251,6 +294,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Fire;
     private readonly InputAction m_PlayerMovement_Build;
     private readonly InputAction m_PlayerMovement_CycleBuildBlocks;
+    private readonly InputAction m_PlayerMovement_CycleBuildRotation;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -260,6 +304,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_PlayerMovement_Fire;
         public InputAction @Build => m_Wrapper.m_PlayerMovement_Build;
         public InputAction @CycleBuildBlocks => m_Wrapper.m_PlayerMovement_CycleBuildBlocks;
+        public InputAction @CycleBuildRotation => m_Wrapper.m_PlayerMovement_CycleBuildRotation;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -284,6 +329,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @CycleBuildBlocks.started += instance.OnCycleBuildBlocks;
             @CycleBuildBlocks.performed += instance.OnCycleBuildBlocks;
             @CycleBuildBlocks.canceled += instance.OnCycleBuildBlocks;
+            @CycleBuildRotation.started += instance.OnCycleBuildRotation;
+            @CycleBuildRotation.performed += instance.OnCycleBuildRotation;
+            @CycleBuildRotation.canceled += instance.OnCycleBuildRotation;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -303,6 +351,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @CycleBuildBlocks.started -= instance.OnCycleBuildBlocks;
             @CycleBuildBlocks.performed -= instance.OnCycleBuildBlocks;
             @CycleBuildBlocks.canceled -= instance.OnCycleBuildBlocks;
+            @CycleBuildRotation.started -= instance.OnCycleBuildRotation;
+            @CycleBuildRotation.performed -= instance.OnCycleBuildRotation;
+            @CycleBuildRotation.canceled -= instance.OnCycleBuildRotation;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -327,5 +378,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnBuild(InputAction.CallbackContext context);
         void OnCycleBuildBlocks(InputAction.CallbackContext context);
+        void OnCycleBuildRotation(InputAction.CallbackContext context);
     }
 }

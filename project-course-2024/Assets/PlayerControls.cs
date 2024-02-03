@@ -46,6 +46,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b64e77d-8e89-4cfc-a2ba-f12718fdea30"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Build"",
                     ""type"": ""Button"",
                     ""id"": ""69d7e0b0-062e-40c3-80ad-55f198bef001"",
@@ -53,6 +62,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CycleBuildBlocks"",
+                    ""type"": ""Value"",
+                    ""id"": ""f1cc185f-798a-4a4f-b588-d46f384dba8f"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CycleBuildRotation"",
+                    ""type"": ""Value"",
+                    ""id"": ""20995f29-a7f6-4e2e-8b4a-29f561b4a2ca"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -132,6 +159,61 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Build"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c618642f-4499-46fc-8621-a6b87846fa03"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b72ee1da-49fd-48fe-979d-f351f2e2f22e"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleBuildBlocks"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""0fd7ff89-cbc0-454d-9414-653708ba73e6"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleBuildRotation"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""5046e291-9f9e-40f5-adac-cdb872da9947"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleBuildRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""201d9827-f200-4732-ad87-38f7abc5741f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleBuildRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -142,7 +224,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerMovement = asset.FindActionMap("PlayerMovement", throwIfNotFound: true);
         m_PlayerMovement_Walk = m_PlayerMovement.FindAction("Walk", throwIfNotFound: true);
         m_PlayerMovement_Jump = m_PlayerMovement.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerMovement_Fire = m_PlayerMovement.FindAction("Fire", throwIfNotFound: true);
         m_PlayerMovement_Build = m_PlayerMovement.FindAction("Build", throwIfNotFound: true);
+        m_PlayerMovement_CycleBuildBlocks = m_PlayerMovement.FindAction("CycleBuildBlocks", throwIfNotFound: true);
+        m_PlayerMovement_CycleBuildRotation = m_PlayerMovement.FindAction("CycleBuildRotation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -206,14 +291,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IPlayerMovementActions> m_PlayerMovementActionsCallbackInterfaces = new List<IPlayerMovementActions>();
     private readonly InputAction m_PlayerMovement_Walk;
     private readonly InputAction m_PlayerMovement_Jump;
+    private readonly InputAction m_PlayerMovement_Fire;
     private readonly InputAction m_PlayerMovement_Build;
+    private readonly InputAction m_PlayerMovement_CycleBuildBlocks;
+    private readonly InputAction m_PlayerMovement_CycleBuildRotation;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerMovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Walk => m_Wrapper.m_PlayerMovement_Walk;
         public InputAction @Jump => m_Wrapper.m_PlayerMovement_Jump;
+        public InputAction @Fire => m_Wrapper.m_PlayerMovement_Fire;
         public InputAction @Build => m_Wrapper.m_PlayerMovement_Build;
+        public InputAction @CycleBuildBlocks => m_Wrapper.m_PlayerMovement_CycleBuildBlocks;
+        public InputAction @CycleBuildRotation => m_Wrapper.m_PlayerMovement_CycleBuildRotation;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -229,9 +320,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
             @Build.started += instance.OnBuild;
             @Build.performed += instance.OnBuild;
             @Build.canceled += instance.OnBuild;
+            @CycleBuildBlocks.started += instance.OnCycleBuildBlocks;
+            @CycleBuildBlocks.performed += instance.OnCycleBuildBlocks;
+            @CycleBuildBlocks.canceled += instance.OnCycleBuildBlocks;
+            @CycleBuildRotation.started += instance.OnCycleBuildRotation;
+            @CycleBuildRotation.performed += instance.OnCycleBuildRotation;
+            @CycleBuildRotation.canceled += instance.OnCycleBuildRotation;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -242,9 +342,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
             @Build.started -= instance.OnBuild;
             @Build.performed -= instance.OnBuild;
             @Build.canceled -= instance.OnBuild;
+            @CycleBuildBlocks.started -= instance.OnCycleBuildBlocks;
+            @CycleBuildBlocks.performed -= instance.OnCycleBuildBlocks;
+            @CycleBuildBlocks.canceled -= instance.OnCycleBuildBlocks;
+            @CycleBuildRotation.started -= instance.OnCycleBuildRotation;
+            @CycleBuildRotation.performed -= instance.OnCycleBuildRotation;
+            @CycleBuildRotation.canceled -= instance.OnCycleBuildRotation;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -266,6 +375,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnWalk(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
         void OnBuild(InputAction.CallbackContext context);
+        void OnCycleBuildBlocks(InputAction.CallbackContext context);
+        void OnCycleBuildRotation(InputAction.CallbackContext context);
     }
 }

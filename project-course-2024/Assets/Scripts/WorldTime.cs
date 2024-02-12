@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum TimeOfDay
+{
+    Day,
+    Night
+}
 public class WorldTime : MonoBehaviour
 {
+    public TimeOfDay currentTimeOfDay;
     public static WorldTime instance;
     [SerializeField] private float currentTime;
     [SerializeField, Range(0, 24)] private float timeOfDay;
@@ -11,12 +16,12 @@ public class WorldTime : MonoBehaviour
     public float timeFraction;
 
     [Header("Length of ingame day (seconds)")]
-    [SerializeField] private int dayLength = 600; //Length of ingame day in seconds
+    public int dayLength = 600; //Length of ingame day in seconds
 
     [Header("Hours, minutes, seconds")]
-    [SerializeField] private int hour;
-    [SerializeField] private int minute;
-    [SerializeField] private int second;
+    public int hour;
+    public int minute;
+    public int second;
     
 
     private void Awake()
@@ -36,6 +41,12 @@ public class WorldTime : MonoBehaviour
     }
     private void Update()
     {
+        if (hour >= 20 || hour <= 8)
+        {
+            currentTimeOfDay = TimeOfDay.Night;
+        }
+        else
+            currentTimeOfDay = TimeOfDay.Day;
         if (currentTime > dayLength)
         {
             currentTime = 0;

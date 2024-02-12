@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPointEmpty: {fileID: 8802375681040559869}
-  enemyPrefab: {fileID: 6051474354649925889, guid: 6455a6bf736592740a311bf2ddd59485,
+  enemyPrefab: {fileID: 652076148235760732, guid: 6455a6bf736592740a311bf2ddd59485,
     type: 3}
   spawnPoint: []
   spawnCircleRadius: 5

@@ -60,7 +60,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
-    private void SpawnEnemy()
+    public void SpawnEnemy()
     {
         GetSpawnPoints();
         for (int i = 0; i < numOfEnemies; i++)

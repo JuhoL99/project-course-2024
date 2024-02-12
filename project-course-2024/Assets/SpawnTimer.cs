@@ -37,6 +37,5 @@ public class SpawnTimer : MonoBehaviour
             spawner.SpawnEnemy();
             return;
         }
-        
     }
 }

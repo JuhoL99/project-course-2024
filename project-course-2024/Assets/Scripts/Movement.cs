@@ -14,11 +14,11 @@ public class Movement : MonoBehaviour
     Vector2 moveDir2;
     Vector3 moveDir3;
 
-    bool walkInputting;
+    bool walkInputting, onGroundLastFrame;
     float ySpeed;
     float groundedGravity = 0.1f;
 
-    [Min(0f)] public float baseMoveSpeed, baseJumpHeight, playerGravity;
+    [Min(0f)] public float baseMoveSpeed, baseJumpHeight, playerGravity, terminalVelocity;
     [Range(0,1)] public float turnLerpSpeed;
 
     void Awake()
@@ -35,10 +35,18 @@ public class Movement : MonoBehaviour
     }
     void CCMove()
     {
-        ySpeed -= playerGravity * Time.deltaTime;
+        if (!cc.isGrounded)
+        {
+            ySpeed -= playerGravity * Time.deltaTime;
+        }
+        else if (!onGroundLastFrame && cc.isGrounded)
+        {
+            ySpeed = -0.01f;
+        }
         moveDir3 *= baseMoveSpeed;
         moveDir3.y = ySpeed;
         cc.Move(new Vector3(moveDir2.x*baseMoveSpeed,ySpeed,moveDir2.y*baseMoveSpeed)  * Time.deltaTime);
+        onGroundLastFrame = cc.isGrounded;
     }
     public void OnWalk(InputAction.CallbackContext ctx)
     {

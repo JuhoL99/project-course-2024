@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 807983106974727042}
   - component: {fileID: 501513025520350122}
   - component: {fileID: 8236519743458253987}
+  - component: {fileID: 326178277238157215}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -37,6 +38,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8020813417259571045}
+  - {fileID: 4517551190143047361}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8898748765088655662
@@ -244,6 +246,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f1cc185f-798a-4a4f-b588-d46f384dba8f
     m_ActionName: PlayerMovement/CycleBuildBlocks[/Mouse/scroll/y]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8236519743458253987}
+        m_TargetAssemblyTypeName: BuildAWall, Assembly-CSharp
+        m_MethodName: OnCycleBuildingRotation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 20995f29-a7f6-4e2e-8b4a-29f561b4a2ca
+    m_ActionName: PlayerMovement/CycleBuildRotation[/Keyboard/q,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 326178277238157215}
+        m_TargetAssemblyTypeName: LockOn, Assembly-CSharp
+        m_MethodName: OnLockOnInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 967922c2-4b3a-421a-9f95-260261de4084
+    m_ActionName: PlayerMovement/LockOn[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement
@@ -264,6 +298,7 @@ MonoBehaviour:
   baseMoveSpeed: 10
   baseJumpHeight: 3
   playerGravity: 30
+  terminalVelocity: 0
   turnLerpSpeed: 0.1
 --- !u!114 &8236519743458253987
 MonoBehaviour:
@@ -285,6 +320,18 @@ MonoBehaviour:
     type: 3}
   buildMaterial: {fileID: 2100000, guid: 113efd774a3af1a4793268408719c655, type: 2}
   gridSize: 3
+--- !u!114 &326178277238157215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113995292624435506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7112fd77744f82f42acef9c03a5121ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &225130368106103104
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,3 +439,34 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &4383756551677939109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4517551190143047361}
+  m_Layer: 3
+  m_Name: LockOnRange
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4517551190143047361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4383756551677939109}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6472300832988388710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

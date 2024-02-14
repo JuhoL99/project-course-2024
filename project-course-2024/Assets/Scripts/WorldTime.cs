@@ -41,7 +41,7 @@ public class WorldTime : MonoBehaviour
     }
     private void Update()
     {
-        if (hour >= 20 || hour <= 8)
+        if (hour >= 18 || hour <= 6)
         {
             currentTimeOfDay = TimeOfDay.Night;
         }

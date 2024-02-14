@@ -61,7 +61,7 @@ public class BuildAWall : MonoBehaviour
         Mathf.FloorToInt(pointingPos.x / gridSize),
         Mathf.FloorToInt(pointingPos.z / gridSize)) * gridSize;
         Vector3 worldBuildPos = new Vector3(buildCoords.x + gridSize / 2f,
-            ghostObject.transform.localScale.y / 2 + 0.01f,
+            ghostObject.transform.localScale.y / 2 + 10f /*0.01f*/,
             buildCoords.y + gridSize / 2f);
 
         //buildRot.y = Mathf.FloorToInt((buildRot.y + 45) / 90f) * 90f;

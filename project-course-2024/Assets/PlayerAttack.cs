@@ -25,6 +25,10 @@ public class PlayerAttack : MonoBehaviour
             {
                 Destroy(hit.collider.gameObject);
             }
+            else if(hit.collider.gameObject.layer == LayerMask.NameToLayer(""))
+            {
+
+            }
         }
     }
 }

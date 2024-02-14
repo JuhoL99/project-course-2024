@@ -18,7 +18,9 @@ public class EnemyNavigation : MonoBehaviour
     private NavMeshAgent agent;
     private Rigidbody rb;
     private PlayerManager player;
+    private PlayerHealthManager playerHealthManager;
     private Vector3 mainGoal = Vector3.zero;
+    [SerializeField] private GameObject egg;
     [SerializeField] private LayerMask layerToHit;
 
     [SerializeField] private GameObject currentObstacle;
@@ -41,6 +43,7 @@ public class EnemyNavigation : MonoBehaviour
     public Vector3 navmeshVel; //debug
     public Vector3 rbVel; //debug
     public Vector3 moveAmount;
+    private bool isDead = false;
 
     private void Start()
     {
@@ -48,6 +51,9 @@ public class EnemyNavigation : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         player = PlayerManager.instance;
+        playerHealthManager = PlayerHealthManager.instance;
+        egg = GameObject.FindWithTag("MainTarget");
+        mainGoal = egg.transform.position;
     }
     private void Update()
     {
@@ -55,7 +61,7 @@ public class EnemyNavigation : MonoBehaviour
         rbVel = rb.velocity;  //debug
         moveAmount = new Vector3(agent.velocity.x, 0, agent.velocity.z).normalized;
 
-        MoveToMouse();
+        //MoveToMouse();
         CheckPlayer();
         //rigidbody makes agents jitter and bug out when they touch eachother, setting velocity to zero fixes it?
         //remove rigidbody later?
@@ -84,6 +90,11 @@ public class EnemyNavigation : MonoBehaviour
             timeNav = 0;
             agent.SetDestination(mainGoal);
             CheckObstacles();
+            float distance = Vector3.Distance(transform.position, mainGoal);
+            if(distance < 1.5 && !isDead)
+            {
+                Death();
+            }
         }
     }
     void CheckPlayer()
@@ -111,7 +122,7 @@ public class EnemyNavigation : MonoBehaviour
     void CheckObstacles()
     {
         RaycastHit hit;
-        Vector3 castLocation = new Vector3(transform.position.x, transform.position.y / 2, transform.position.z);
+        Vector3 castLocation = new Vector3(transform.position.x, transform.position.y-1, transform.position.z);
         Debug.DrawRay(castLocation, transform.forward * 1.5f, Color.red, 20f);
         if (Physics.Raycast(castLocation, transform.forward, out hit, 1f, layerToHit.value))
         {
@@ -159,5 +170,13 @@ public class EnemyNavigation : MonoBehaviour
         {
             enemyManager.State = EnemyState.MainGoal;
         }
+    }
+    void Death()
+    {
+        Destroy(gameObject, 4f);
+        isDead = true;
+        playerHealthManager.TakeDamage(1);
+        return;
+
     }
 }

@@ -22,7 +22,7 @@ public class DestructibleObject : MonoBehaviour
         if(currentHealth <= 0)
         {
             gameObject.SetActive(false);
-            navMeshManager.RebakeNavMesh();
+            //navMeshManager.RebakeNavMesh();
             Destroy(gameObject);
         }
     }

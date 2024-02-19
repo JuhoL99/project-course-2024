@@ -41,7 +41,7 @@ public class EnemyNavigation : MonoBehaviour
     public float chaseDistance;
 
     public Vector3 navmeshVel; //debug
-    public Vector3 rbVel; //debug
+    private Vector3 rbVel; //debug
     public Vector3 moveAmount;
     private bool isDead = false;
 
@@ -111,7 +111,7 @@ public class EnemyNavigation : MonoBehaviour
                 //if player is detected start chasing it no matter what doing
                 if (hit.collider.gameObject == player.gameObject)
                 {
-                    Debug.Log("hit player");
+                    //Debug.Log("hit player");
                     agent.isStopped = false;
                     validTarget = false;
                     enemyManager.State = EnemyState.ChasePlayer;
@@ -177,6 +177,5 @@ public class EnemyNavigation : MonoBehaviour
         isDead = true;
         playerHealthManager.TakeDamage(1);
         return;
-
     }
 }

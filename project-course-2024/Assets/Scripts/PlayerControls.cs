@@ -80,6 +80,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LockOn"",
+                    ""type"": ""Button"",
+                    ""id"": ""967922c2-4b3a-421a-9f95-260261de4084"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -214,6 +223,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""CycleBuildRotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""049276a9-d958-403f-86be-450ae681cb23"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LockOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -228,6 +248,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerMovement_Build = m_PlayerMovement.FindAction("Build", throwIfNotFound: true);
         m_PlayerMovement_CycleBuildBlocks = m_PlayerMovement.FindAction("CycleBuildBlocks", throwIfNotFound: true);
         m_PlayerMovement_CycleBuildRotation = m_PlayerMovement.FindAction("CycleBuildRotation", throwIfNotFound: true);
+        m_PlayerMovement_LockOn = m_PlayerMovement.FindAction("LockOn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -295,6 +316,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Build;
     private readonly InputAction m_PlayerMovement_CycleBuildBlocks;
     private readonly InputAction m_PlayerMovement_CycleBuildRotation;
+    private readonly InputAction m_PlayerMovement_LockOn;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -305,6 +327,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Build => m_Wrapper.m_PlayerMovement_Build;
         public InputAction @CycleBuildBlocks => m_Wrapper.m_PlayerMovement_CycleBuildBlocks;
         public InputAction @CycleBuildRotation => m_Wrapper.m_PlayerMovement_CycleBuildRotation;
+        public InputAction @LockOn => m_Wrapper.m_PlayerMovement_LockOn;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -332,6 +355,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @CycleBuildRotation.started += instance.OnCycleBuildRotation;
             @CycleBuildRotation.performed += instance.OnCycleBuildRotation;
             @CycleBuildRotation.canceled += instance.OnCycleBuildRotation;
+            @LockOn.started += instance.OnLockOn;
+            @LockOn.performed += instance.OnLockOn;
+            @LockOn.canceled += instance.OnLockOn;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -354,6 +380,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @CycleBuildRotation.started -= instance.OnCycleBuildRotation;
             @CycleBuildRotation.performed -= instance.OnCycleBuildRotation;
             @CycleBuildRotation.canceled -= instance.OnCycleBuildRotation;
+            @LockOn.started -= instance.OnLockOn;
+            @LockOn.performed -= instance.OnLockOn;
+            @LockOn.canceled -= instance.OnLockOn;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -379,5 +408,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnBuild(InputAction.CallbackContext context);
         void OnCycleBuildBlocks(InputAction.CallbackContext context);
         void OnCycleBuildRotation(InputAction.CallbackContext context);
+        void OnLockOn(InputAction.CallbackContext context);
     }
 }

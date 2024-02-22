@@ -14,11 +14,11 @@ public class Movement : MonoBehaviour
     Vector2 moveDir2;
     Vector3 moveDir3;
 
-    bool walkInputting;
+    bool walkInputting, onGroundLastFrame, running;
     float ySpeed;
     float groundedGravity = 0.1f;
 
-    [Min(0f)] public float baseMoveSpeed, baseJumpHeight, playerGravity;
+    [Min(0f)] public float baseMoveSpeed, runMultiplier, baseJumpHeight, playerGravity, terminalVelocity;
     [Range(0,1)] public float turnLerpSpeed;
 
     void Awake()
@@ -35,10 +35,20 @@ public class Movement : MonoBehaviour
     }
     void CCMove()
     {
-        ySpeed -= playerGravity * Time.deltaTime;
-        moveDir3 *= baseMoveSpeed;
+        if (!cc.isGrounded)
+        {
+            ySpeed -= playerGravity * Time.deltaTime;
+        }
+        else if (!onGroundLastFrame && cc.isGrounded)
+        {
+            ySpeed = -0.01f;
+        }
+        float moveSpeed = baseMoveSpeed;
+        if (running) moveSpeed *= runMultiplier;
+        moveDir3 *= moveSpeed;
         moveDir3.y = ySpeed;
-        cc.Move(new Vector3(moveDir2.x*baseMoveSpeed,ySpeed,moveDir2.y*baseMoveSpeed)  * Time.deltaTime);
+        cc.Move(new Vector3(moveDir2.x*moveSpeed,ySpeed,moveDir2.y*moveSpeed)  * Time.deltaTime);
+        onGroundLastFrame = cc.isGrounded;
     }
     public void OnWalk(InputAction.CallbackContext ctx)
     {
@@ -56,6 +66,10 @@ public class Movement : MonoBehaviour
         if (!(ctx.performed && cc.isGrounded)) return;
         ySpeed = Mathf.Sqrt(2 * playerGravity * baseJumpHeight);
     }
+    public void OnRun(InputAction.CallbackContext ctx)
+    {
+        running = ctx.performed;
+    }
     void UpdateHorizontalMoveDir()
     {
         if (walkInputting)
@@ -65,7 +79,7 @@ public class Movement : MonoBehaviour
             float moveAngle = (inputAngle + camAngle) % 360;
             moveDir2 = new Vector2(Mathf.Cos(moveAngle * Mathf.Deg2Rad), Mathf.Sin(moveAngle * Mathf.Deg2Rad));
             moveDir3 = new Vector3(moveDir2.x, 0f, moveDir2.y);
-            transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(transform.rotation.eulerAngles.y, 90 - moveAngle, turnLerpSpeed), 0);
+            transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(transform.rotation.eulerAngles.y, 90 - moveAngle, turnLerpSpeed*60f*Time.deltaTime), 0);
         }
         else
         {

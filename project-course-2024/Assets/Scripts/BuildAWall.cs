@@ -12,42 +12,28 @@ public class BuildAWall : MonoBehaviour
     public int gridSize;
     GameObject ghostObject;
     MeshFilter ghostMeshFilter;
-    bool buildMode, cameraBuildModeLerp;
+    [System.NonSerialized] public bool buildMode;
     int chosenBuildingBlockIndex, buildRotationInt;
     int buildingListLength;
-    float camOrigYSpeed, camOrigXSpeed;
     Vector2Int buildCoords;
     List<Vector2Int> builtCoords = new List<Vector2Int>();
     CinemachineFreeLook freeLook;
     Quaternion buildRotation;
+    LockOn lockOnScript;
+    CameraBeh cameraScript;
     void Start()
     {
         buildingListLength = buildingBlocks.Length;
         freeLook = GameObject.Find("FreeLook Camera").GetComponent<CinemachineFreeLook>();
-        camOrigYSpeed = freeLook.m_YAxis.m_MaxSpeed;
-        camOrigXSpeed = freeLook.m_XAxis.m_MaxSpeed;
+        lockOnScript = GetComponent<LockOn>();
+        cameraScript = GetComponent<CameraBeh>();
     }
 
     void Update()
     {
         UpdateGhostObjectPos();
     }
-    void LateUpdate()
-    {
-        BuildModeCameraUpdate();
-    }
-    void BuildModeCameraUpdate()
-    {
-        if (buildMode && cameraBuildModeLerp)
-        {
-            float yAxis = freeLook.m_YAxis.Value;
-            freeLook.m_YAxis.Value = Mathf.Lerp(yAxis, 1f, 0.1f);
-            if (1 - yAxis < 0.001f)
-            {
-                cameraBuildModeLerp = false;
-            }
-        }
-    }
+
     void UpdateGhostObjectPos()
     {
         if (!buildMode) return;
@@ -67,25 +53,10 @@ public class BuildAWall : MonoBehaviour
         //buildRot.y = Mathf.FloorToInt((buildRot.y + 45) / 90f) * 90f;
         ghostObject.transform.position = worldBuildPos;
     }
-    void SetBuildCameraEnabled(bool enabled)
-    {
-        if (enabled)
-        {
-            freeLook.m_YAxis.m_MaxSpeed = 0;
-            freeLook.m_XAxis.m_MaxSpeed = 0;
-            cameraBuildModeLerp = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            freeLook.m_YAxis.m_MaxSpeed = camOrigYSpeed;
-            freeLook.m_XAxis.m_MaxSpeed = camOrigXSpeed;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-    }
+    
     public void OnBuildInput(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed) return;
+        if (!ctx.performed || lockOnScript.lockedOn) return;
         if (buildMode) ExitBuildMode(); else EnterBuildMode();
     }
     public void OnFireInput(InputAction.CallbackContext ctx)
@@ -113,24 +84,24 @@ public class BuildAWall : MonoBehaviour
     }
     void EnterBuildMode()
     {
-        SetBuildCameraEnabled(true);
+        cameraScript.SetBuildCameraEnabled(true);
         buildMode = true;
         ghostObject = Instantiate(ghostBlockTemplate);
         ghostMeshFilter = ghostObject.GetComponent<MeshFilter>();
         SetGhostObjectMesh();
+    }
+    void ExitBuildMode()
+    {
+        cameraScript.SetBuildCameraEnabled(false);
+        buildMode = false;
+        Destroy(ghostObject);
+        ghostObject = null;
     }
     void SetGhostObjectMesh()
     {
         GameObject chosenPrefab = buildingBlocks[chosenBuildingBlockIndex];
         ghostMeshFilter.sharedMesh = chosenPrefab.GetComponent<MeshFilter>().sharedMesh;
         ghostObject.transform.localScale = chosenPrefab.transform.localScale;
-    }
-    void ExitBuildMode()
-    {
-        SetBuildCameraEnabled(false);
-        buildMode = false;
-        Destroy(ghostObject);
-        ghostObject = null;
     }
     void BuildObject()
     {

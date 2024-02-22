@@ -2,20 +2,23 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CameraBeh : MonoBehaviour
 {
     CinemachineFreeLook freeLook;
     [System.NonSerialized] public bool buildMode, lockOn;
-    bool buildModeLerp;
-    float camOrigYSpeed, camOrigXSpeed;
-    Transform lockOnTarget;
-
+    bool yLerping;
+    float camOrigYSpeed, camOrigXSpeed, lerpTarget;
+    Transform lockOnTarget, cam;
+    Movement moveScript;
     void Start()
     {
         freeLook = GameObject.Find("FreeLook Camera").GetComponent<CinemachineFreeLook>();
+        cam = Camera.main.transform;
         camOrigYSpeed = freeLook.m_YAxis.m_MaxSpeed;
         camOrigXSpeed = freeLook.m_XAxis.m_MaxSpeed;
+        moveScript = GetComponent<Movement>();
     }
 
     void Update()
@@ -24,18 +27,18 @@ public class CameraBeh : MonoBehaviour
     }
     void LateUpdate()
     {
-        BuildModeUpdate();
+        CamYLerp();
         LockOnUpdate();
     }
-    void BuildModeUpdate()
+    void CamYLerp()
     {
-        if (buildMode && buildModeLerp)
+        if (yLerping)
         {
             float yAxis = freeLook.m_YAxis.Value;
-            freeLook.m_YAxis.Value = Mathf.Lerp(yAxis, 1f, 6f * Time.deltaTime);
-            if (1 - yAxis < 0.001f)
+            freeLook.m_YAxis.Value = Mathf.Lerp(yAxis, lerpTarget, 6f * Time.deltaTime);
+            if (Mathf.Abs(lerpTarget - yAxis) < 0.01f)
             {
-                buildModeLerp = false;
+                yLerping = false;
             }
         }
     }
@@ -43,7 +46,8 @@ public class CameraBeh : MonoBehaviour
     {
         if (!lockOn || lockOnTarget == null) return;
         Vector3 playerToEnemy = lockOnTarget.position - transform.position;
-        freeLook.m_XAxis.Value = Mathf.Rad2Deg*Mathf.Atan2(playerToEnemy.x, playerToEnemy.z);
+        freeLook.m_XAxis.Value = Mathf.Rad2Deg * Mathf.Atan2(playerToEnemy.x, playerToEnemy.z);
+            //+ Vector2.Dot(moveScript.moveDir2.normalized, new Vector2(cam.forward.z,cam.forward.x).normalized) * 30f;
     }
     public void SetBuildCameraEnabled(bool enabled)
     {
@@ -52,7 +56,8 @@ public class CameraBeh : MonoBehaviour
         {
             freeLook.m_YAxis.m_MaxSpeed = 0;
             freeLook.m_XAxis.m_MaxSpeed = 0;
-            buildModeLerp = true;
+            lerpTarget = 1f;
+            yLerping = true;
             Cursor.lockState = CursorLockMode.None;
         }
         else
@@ -70,7 +75,8 @@ public class CameraBeh : MonoBehaviour
         freeLook.LookAt = target;
         freeLook.m_YAxis.m_MaxSpeed = 0;
         freeLook.m_XAxis.m_MaxSpeed = 0;
-        freeLook.m_YAxis.Value = 0.3f;
+        lerpTarget = 0.4f;
+        yLerping = true;
     }
     public void DeactivateLockOn()
     {

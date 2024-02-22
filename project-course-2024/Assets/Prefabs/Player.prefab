@@ -295,7 +295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6adbb44c95c196478ed85d53b273349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMoveSpeed: 10
+  baseMoveSpeed: 6
+  runMultiplier: 1.5
   baseJumpHeight: 3
   playerGravity: 30
   terminalVelocity: 0
@@ -332,6 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7112fd77744f82f42acef9c03a5121ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockOnRange: 20
 --- !u!1 &225130368106103104
 GameObject:
   m_ObjectHideFlags: 0

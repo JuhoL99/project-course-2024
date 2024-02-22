@@ -24,9 +24,11 @@ public class PlayerAttack : MonoBehaviour
     }
     private void PerformAttack()
     {
+        Debug.Log("test");
+        playerAnim.Play("Hit1");
         //if new attack within combo time, advance phase
         //Debug.Log(currentComboPhase);
-        lastInputTime = Time.time;
+        /*lastInputTime = Time.time;
         Debug.Log(lastInputTime);
         if(Time.time - lastInputTime > comboTimer)
         {
@@ -41,7 +43,7 @@ public class PlayerAttack : MonoBehaviour
         else
         {
             currentComboPhase = 0;
-        }
+        }*/
 
 
 

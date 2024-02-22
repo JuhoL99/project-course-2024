@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MainLight
   - MainTarget
+  - WeaponRight
   layers:
   - Default
   - TransparentFX

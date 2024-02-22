@@ -64,6 +64,7 @@ public class CameraBeh : MonoBehaviour
     }
     public void ActivateLockOn(Transform target)
     {
+        print("CameraLock");
         lockOn = true;
         lockOnTarget = target;
         freeLook.LookAt = target;

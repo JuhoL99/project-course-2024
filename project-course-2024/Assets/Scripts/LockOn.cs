@@ -28,7 +28,7 @@ public class LockOn : MonoBehaviour
     }
     void LockedOnUpdate()
     {
-        if (lockTarget == null || (lockTarget.position - transform.position).magnitude < lockOffRange) DeactivateLockOn();
+        if (lockTarget == null || (lockTarget.position - transform.position).magnitude > lockOffRange) DeactivateLockOn();
     }
     public void OnLockOnInput(InputAction.CallbackContext ctx)
     {
@@ -65,10 +65,8 @@ public class LockOn : MonoBehaviour
         foreach (GameObject go in lockOnVolume.enemiesInVolume)
         {
             float enemyCamAngle = Vector3.Angle(go.transform.position - cam.position, cam.forward);
-            print(enemyCamAngle);
             if (enemyCamAngle < smallestAngle)
             {
-                print("smaller");
                 smallestAngle = enemyCamAngle;
                 chosenEnemy = go;
             }

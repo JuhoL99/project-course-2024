@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         anim.SetBool("running", running);
-        if(running)
+        if(running && walkInputting)
         {
             playerObject.transform.localRotation = Quaternion.Lerp(playerObject.transform.localRotation, (Quaternion.Euler(transform.localRotation.x-30f, transform.localRotation.y-180f, transform.localRotation.z)),5*Time.deltaTime);
         }

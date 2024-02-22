@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b8b7453602ad3b41b2203facf204559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  egg: {fileID: 0}
   layerToHit:
     serializedVersion: 2
     m_Bits: 64
@@ -196,7 +197,6 @@ MonoBehaviour:
   maxAngle: 120
   chaseDistance: 8
   navmeshVel: {x: 0, y: 0, z: 0}
-  rbVel: {x: 0, y: 0, z: 0}
   moveAmount: {x: 0, y: 0, z: 0}
 --- !u!1 &1335331759644487894
 GameObject:
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 4896580824541806713}
   - component: {fileID: 4863055814565784621}
   - component: {fileID: 879056320727604967}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Capsule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

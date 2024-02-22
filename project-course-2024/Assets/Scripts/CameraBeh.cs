@@ -24,9 +24,10 @@ public class CameraBeh : MonoBehaviour
     }
     void LateUpdate()
     {
-        BuildModeCameraUpdate();
+        BuildModeUpdate();
+        LockOnUpdate();
     }
-    void BuildModeCameraUpdate()
+    void BuildModeUpdate()
     {
         if (buildMode && buildModeLerp)
         {
@@ -38,8 +39,15 @@ public class CameraBeh : MonoBehaviour
             }
         }
     }
+    void LockOnUpdate()
+    {
+        if (!lockOn || lockOnTarget == null) return;
+        Vector3 playerToEnemy = lockOnTarget.position - transform.position;
+        freeLook.m_XAxis.Value = Mathf.Rad2Deg*Mathf.Atan2(playerToEnemy.x, playerToEnemy.z);
+    }
     public void SetBuildCameraEnabled(bool enabled)
     {
+        buildMode = enabled;
         if (enabled)
         {
             freeLook.m_YAxis.m_MaxSpeed = 0;
@@ -59,10 +67,16 @@ public class CameraBeh : MonoBehaviour
         lockOn = true;
         lockOnTarget = target;
         freeLook.LookAt = target;
+        freeLook.m_YAxis.m_MaxSpeed = 0;
+        freeLook.m_XAxis.m_MaxSpeed = 0;
+        freeLook.m_YAxis.Value = 0.3f;
     }
     public void DeactivateLockOn()
     {
         lockOn = false;
         lockOnTarget = null;
+        freeLook.m_YAxis.m_MaxSpeed = camOrigYSpeed;
+        freeLook.m_XAxis.m_MaxSpeed = camOrigXSpeed;
+        freeLook.LookAt = transform;
     }
 }

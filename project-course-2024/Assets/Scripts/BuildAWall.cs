@@ -17,14 +17,12 @@ public class BuildAWall : MonoBehaviour
     int buildingListLength;
     Vector2Int buildCoords;
     List<Vector2Int> builtCoords = new List<Vector2Int>();
-    CinemachineFreeLook freeLook;
     Quaternion buildRotation;
     LockOn lockOnScript;
     CameraBeh cameraScript;
     void Start()
     {
         buildingListLength = buildingBlocks.Length;
-        freeLook = GameObject.Find("FreeLook Camera").GetComponent<CinemachineFreeLook>();
         lockOnScript = GetComponent<LockOn>();
         cameraScript = GetComponent<CameraBeh>();
     }

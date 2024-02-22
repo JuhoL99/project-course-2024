@@ -16,7 +16,7 @@ TagManager:
   - DestructibleObject
   - Enemy
   - Resource
-  - 
+  - LockOnVolume
   - 
   - 
   - 

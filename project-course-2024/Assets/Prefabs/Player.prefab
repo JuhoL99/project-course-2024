@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 501513025520350122}
   - component: {fileID: 8236519743458253987}
   - component: {fileID: 326178277238157215}
+  - component: {fileID: 2285330365003645000}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -34,8 +35,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8020813417259571045}
   - {fileID: 4517551190143047361}
@@ -278,6 +279,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 967922c2-4b3a-421a-9f95-260261de4084
     m_ActionName: PlayerMovement/LockOn[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8c40be12-c91d-40f5-bcda-105436231d58
+    m_ActionName: PlayerMovement/Run[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement
@@ -334,6 +339,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnRange: 20
+--- !u!114 &2285330365003645000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113995292624435506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a94a2be7591bee4381673941a55efb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &225130368106103104
 GameObject:
   m_ObjectHideFlags: 0

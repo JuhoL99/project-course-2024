@@ -89,6 +89,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""8c40be12-c91d-40f5-bcda-105436231d58"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -234,6 +243,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""LockOn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1e233ee-f3e5-4bdd-9da1-55f5189849cf"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -249,6 +269,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerMovement_CycleBuildBlocks = m_PlayerMovement.FindAction("CycleBuildBlocks", throwIfNotFound: true);
         m_PlayerMovement_CycleBuildRotation = m_PlayerMovement.FindAction("CycleBuildRotation", throwIfNotFound: true);
         m_PlayerMovement_LockOn = m_PlayerMovement.FindAction("LockOn", throwIfNotFound: true);
+        m_PlayerMovement_Run = m_PlayerMovement.FindAction("Run", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,6 +338,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_CycleBuildBlocks;
     private readonly InputAction m_PlayerMovement_CycleBuildRotation;
     private readonly InputAction m_PlayerMovement_LockOn;
+    private readonly InputAction m_PlayerMovement_Run;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -328,6 +350,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @CycleBuildBlocks => m_Wrapper.m_PlayerMovement_CycleBuildBlocks;
         public InputAction @CycleBuildRotation => m_Wrapper.m_PlayerMovement_CycleBuildRotation;
         public InputAction @LockOn => m_Wrapper.m_PlayerMovement_LockOn;
+        public InputAction @Run => m_Wrapper.m_PlayerMovement_Run;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -358,6 +381,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @LockOn.started += instance.OnLockOn;
             @LockOn.performed += instance.OnLockOn;
             @LockOn.canceled += instance.OnLockOn;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -383,6 +409,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @LockOn.started -= instance.OnLockOn;
             @LockOn.performed -= instance.OnLockOn;
             @LockOn.canceled -= instance.OnLockOn;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -409,5 +438,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnCycleBuildBlocks(InputAction.CallbackContext context);
         void OnCycleBuildRotation(InputAction.CallbackContext context);
         void OnLockOn(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
     }
 }

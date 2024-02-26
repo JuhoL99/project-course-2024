@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8236519743458253987}
   - component: {fileID: 326178277238157215}
   - component: {fileID: 2285330365003645000}
+  - component: {fileID: 3266232143797861217}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -280,7 +281,19 @@ MonoBehaviour:
     m_ActionId: 967922c2-4b3a-421a-9f95-260261de4084
     m_ActionName: PlayerMovement/LockOn[/Keyboard/f]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 501513025520350122}
+        m_TargetAssemblyTypeName: Movement, Assembly-CSharp
+        m_MethodName: OnRun
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 8c40be12-c91d-40f5-bcda-105436231d58
     m_ActionName: PlayerMovement/Run[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
@@ -318,6 +331,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d48e0528e35d7bd43b4109056bffae0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildAreaDimensions: {x: 0, y: 0}
+  buildAreaCenter: {x: 0, y: 0}
+  buildHeight: 0
   buildingBlocks:
   - {fileID: 3530987246762088181, guid: f56f25c1a78f4d049beb87df0b3d08a5, type: 3}
   - {fileID: 3530987246762088181, guid: 00ae2d99b836b374eaa06f22b1ee0a9d, type: 3}
@@ -349,6 +365,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a94a2be7591bee4381673941a55efb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3266232143797861217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113995292624435506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c6600eb5d2a7eb42b06c8c6b46a4095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &225130368106103104
@@ -467,8 +495,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4517551190143047361}
+  - component: {fileID: 6287582284956782582}
+  - component: {fileID: 6693663661743919340}
   m_Layer: 3
-  m_Name: LockOnRange
+  m_Name: LockOnVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -489,3 +519,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6472300832988388710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6287582284956782582
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4383756551677939109}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6693663661743919340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4383756551677939109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e539551f3e3a644292a5ace38d68fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiesInVolume: []

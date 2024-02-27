@@ -24,6 +24,15 @@ public class ResetMeleeCollider : StateMachineBehaviour
     {
         PlayerWeapon fist = GameObject.FindWithTag("WeaponRight").GetComponent<PlayerWeapon>();
         fist.EnableWeaponRight(false);
+        GameObject playerObject = GameObject.Find("Player");
+        if(playerObject != null)
+        {
+            Movement moveScript = playerObject.GetComponent<Movement>();
+            if(moveScript != null)
+            {
+                moveScript.canMove = true;
+            }
+        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

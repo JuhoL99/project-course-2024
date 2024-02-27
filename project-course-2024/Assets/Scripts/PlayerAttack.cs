@@ -12,10 +12,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private AnimationClip[] comboSteps;
     [SerializeField] private Animator playerAnim;
     BuildAWall builder;
+    private Movement movementScript;
 
     private void Start()
     {
         builder = GetComponent<BuildAWall>();
+        movementScript = GetComponent<Movement>();
     }
     private void Update()
     {
@@ -29,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
     private void PerformAttack()
     {
         Debug.Log("test");
+        movementScript.canMove = false;
         playerAnim.Play("Hit1");
         //if new attack within combo time, advance phase
         //Debug.Log(currentComboPhase);

@@ -17,7 +17,7 @@ public class Movement : MonoBehaviour
     public Vector3 moveDir3;
 
     [SerializeField] bool walkInputting, onGroundLastFrame, running;
-    [SerializeField] bool canMove = true;
+    public bool canMove = true;
     float ySpeed;
     float groundedGravity = 0.1f;
 
@@ -33,8 +33,6 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        if (!canMove)
-            return;
         anim.SetBool("running", running);
         if(running && walkInputting)
         {
@@ -53,6 +51,8 @@ public class Movement : MonoBehaviour
     }
     void CCMove()
     {
+        /*if (!canMove)
+            return;*/
         if (!cc.isGrounded)
         {
             ySpeed -= playerGravity * Time.deltaTime;
@@ -63,6 +63,7 @@ public class Movement : MonoBehaviour
         }
         float moveSpeed = baseMoveSpeed;
         if (running) moveSpeed *= runMultiplier;
+        if (!canMove) moveSpeed *= 0.2f;
         moveDir3 *= moveSpeed;
         moveDir3.y = ySpeed;
         cc.Move(new Vector3(moveDir2.x*moveSpeed,ySpeed,moveDir2.y*moveSpeed)  * Time.deltaTime);

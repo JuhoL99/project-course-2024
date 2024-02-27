@@ -18,6 +18,13 @@ public class NavMeshManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            RebakeNavMesh();
+        }
+    }
     public void RebakeNavMesh()
     {
         terrain.BuildNavMesh();

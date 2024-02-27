@@ -13,10 +13,11 @@ public class Movement : MonoBehaviour
     [SerializeField] private Animator anim;
 
     Vector2 input;
-    Vector2 moveDir2;
-    Vector3 moveDir3;
+    public Vector2 moveDir2;
+    public Vector3 moveDir3;
 
     [SerializeField] bool walkInputting, onGroundLastFrame, running;
+    [SerializeField] bool canMove = true;
     float ySpeed;
     float groundedGravity = 0.1f;
 
@@ -32,6 +33,8 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        if (!canMove)
+            return;
         anim.SetBool("running", running);
         if(running && walkInputting)
         {
@@ -79,6 +82,7 @@ public class Movement : MonoBehaviour
     public void OnJump(InputAction.CallbackContext ctx)
     {
         if (!(ctx.performed && cc.isGrounded)) return;
+        anim.Play("Jump");
         ySpeed = Mathf.Sqrt(2 * playerGravity * baseJumpHeight);
     }
     public void OnRun(InputAction.CallbackContext ctx)

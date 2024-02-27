@@ -57,6 +57,9 @@ public class EnemyNavigation : MonoBehaviour
     }
     private void Update()
     {
+        if (knockBackEffect)
+            return;
+        rb.velocity = Vector3.zero;
         navmeshVel = agent.velocity; //debug
         rbVel = rb.velocity;  //debug
         moveAmount = new Vector3(agent.velocity.x, 0, agent.velocity.z).normalized;
@@ -65,10 +68,23 @@ public class EnemyNavigation : MonoBehaviour
         CheckPlayer();
         //rigidbody makes agents jitter and bug out when they touch eachother, setting velocity to zero fixes it?
         //remove rigidbody later?
-        if (!knockBackEffect) rb.velocity = Vector3.zero;
+        //if (!knockBackEffect) rb.velocity = Vector3.zero;
+    }
+    public void KnockBack()
+    {
+        StartCoroutine(KnockBackCoroutine());
+    }
+    private IEnumerator KnockBackCoroutine()
+    {
+        agent.enabled = false;
+        knockBackEffect = true;
+        rb.AddForce(player.transform.forward * 10, ForceMode.Impulse);
+        yield return new WaitForSeconds(0.5f);
+        agent.enabled = true; 
+        knockBackEffect = false;
     }
     //just for testing navigation, remove later
-    void MoveToMouse()
+    /*void MoveToMouse()
     {
         agent.isStopped = false;
         if (Input.GetMouseButtonDown(0))
@@ -80,10 +96,12 @@ public class EnemyNavigation : MonoBehaviour
                 agent.destination = hit.point;
             }
         }
-    }
+    }*/
     public void MainGoal()
     {
         //move towards main goal and check for obstacles with raycast few times a second
+        if (knockBackEffect)
+            return;
         timeNav += Time.deltaTime;
         if (timeNav > timerNav)
         {
@@ -164,7 +182,10 @@ public class EnemyNavigation : MonoBehaviour
     }
     public void ChasePlayer()
     {
-        agent.SetDestination(player.transform.position);
+        if (agent.enabled)
+        {
+            agent.SetDestination(player.transform.position);
+        }
         //later: if player in attack range, initiate attack anim
         if (playerDirection.magnitude > chaseDistance)
         {

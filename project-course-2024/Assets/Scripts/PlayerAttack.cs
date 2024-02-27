@@ -11,15 +11,19 @@ public class PlayerAttack : MonoBehaviour
     private bool isAttacking;
     [SerializeField] private AnimationClip[] comboSteps;
     [SerializeField] private Animator playerAnim;
+    BuildAWall builder;
 
-
+    private void Start()
+    {
+        builder = GetComponent<BuildAWall>();
+    }
     private void Update()
     {
 
     }
     public void OnFireInput(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed) return;
+        if (!ctx.performed || builder.buildMode) return;
         PerformAttack();
     }
     private void PerformAttack()

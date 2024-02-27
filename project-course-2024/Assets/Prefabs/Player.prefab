@@ -296,6 +296,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8c40be12-c91d-40f5-bcda-105436231d58
     m_ActionName: PlayerMovement/Run[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8236519743458253987}
+        m_TargetAssemblyTypeName: BuildAWall, Assembly-CSharp
+        m_MethodName: OnDestroyModeInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bbfbe23c-352a-4a6c-b4c2-8b290c6d40dc
+    m_ActionName: PlayerMovement/DestroyMode[/Keyboard/x]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement
@@ -331,17 +347,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d48e0528e35d7bd43b4109056bffae0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildAreaDimensions: {x: 0, y: 0}
-  buildAreaCenter: {x: 0, y: 0}
-  buildHeight: 0
+  buildAreaDimensions: {x: 10, y: 10}
+  buildAreaCenter: {x: 6, y: 6}
+  buildHeight: 10
   buildingBlocks:
   - {fileID: 3530987246762088181, guid: f56f25c1a78f4d049beb87df0b3d08a5, type: 3}
   - {fileID: 3530987246762088181, guid: 00ae2d99b836b374eaa06f22b1ee0a9d, type: 3}
   - {fileID: 5324123287656592607, guid: c0371decffc233c4db0aedc41002d15c, type: 3}
   ghostBlockTemplate: {fileID: 8671494271708734382, guid: 78976949e07111540a928285e89dd7e9,
     type: 3}
-  buildMaterial: {fileID: 2100000, guid: 113efd774a3af1a4793268408719c655, type: 2}
-  gridSize: 3
+  cellSize: 3
+  ghostObjectMaterials:
+  - {fileID: 2100000, guid: 113efd774a3af1a4793268408719c655, type: 2}
+  - {fileID: 2100000, guid: 847527dd3af87294a9dac1c4fac133e8, type: 2}
+  - {fileID: 2100000, guid: def97c7cc3d42514fae3cbc05af3ee02, type: 2}
 --- !u!114 &326178277238157215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,7 +516,7 @@ GameObject:
   - component: {fileID: 4517551190143047361}
   - component: {fileID: 6287582284956782582}
   - component: {fileID: 6693663661743919340}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: LockOnVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}

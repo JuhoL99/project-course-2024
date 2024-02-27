@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1495272615263120662}
   - component: {fileID: 8857366812304996893}
   - component: {fileID: 7685251400033969969}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: shortWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aeea994e275f2a44fb43e8bfb0e4e3bd, type: 2}
+  - {fileID: 2100000, guid: 32be71d32f7d7104eb7f2a6ef197b530, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

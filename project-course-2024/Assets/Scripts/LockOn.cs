@@ -28,6 +28,7 @@ public class LockOn : MonoBehaviour
     }
     void LockedOnUpdate()
     {
+        if (!lockedOn) return;
         if (lockTarget == null || (lockTarget.position - transform.position).magnitude > lockOffRange) DeactivateLockOn();
     }
     public void OnLockOnInput(InputAction.CallbackContext ctx)

@@ -16,7 +16,7 @@ public class LockOn : MonoBehaviour
     void Start()
     {
         buildScript = GetComponent<BuildAWall>();
-        lockOnVolume = transform.GetChild(1).GetComponent<LockOnVolume>();
+        lockOnVolume = GetComponentInChildren<LockOnVolume>();
         cam = Camera.main.transform;
         cameraScript = GetComponent<CameraBeh>();
         lockOffRange = lockOnVolume.GetComponent<SphereCollider>().radius*1.4f;
@@ -34,7 +34,6 @@ public class LockOn : MonoBehaviour
     public void OnLockOnInput(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed || buildScript.buildMode) return;
-        print(lockedOn);
         if (lockedOn)
         {
             DeactivateLockOn();
@@ -49,10 +48,8 @@ public class LockOn : MonoBehaviour
         GameObject target = FindClosestEnemyToReticle();
         if (target == null) return;
         lockedOn = true;
-        print(target.name);
         cameraScript.ActivateLockOn(target.transform);
         lockTarget = target.transform;
-
     }
     void DeactivateLockOn()
     {

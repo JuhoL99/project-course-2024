@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
+    public Dictionary<string,int> nameToResourceNum;
+    public int[] currentResources;
 
     private void Awake()
     {
@@ -16,5 +18,17 @@ public class PlayerManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        CreateResources();
+    }
+    void CreateResources()
+    {
+        nameToResourceNum = new Dictionary<string,int>
+        {
+            { "Stone", 0 },
+            { "Iron", 1 },
+            { "Wood", 2 },
+            { "Egg Food", 3 }
+        };
+        currentResources = new int[nameToResourceNum.Count];
     }
 }

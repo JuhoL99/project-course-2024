@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 326178277238157215}
   - component: {fileID: 2285330365003645000}
   - component: {fileID: 3266232143797861217}
+  - component: {fileID: 2126448865796671855}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -314,7 +315,19 @@ MonoBehaviour:
     m_ActionId: bbfbe23c-352a-4a6c-b4c2-8b290c6d40dc
     m_ActionName: PlayerMovement/DestroyMode[/Keyboard/x]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2126448865796671855}
+        m_TargetAssemblyTypeName: PlayerInteract, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 520fa72d-ac3a-4ae8-af37-ac0f1999c0b6
     m_ActionName: PlayerMovement/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
@@ -391,6 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a94a2be7591bee4381673941a55efb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentResources: 
 --- !u!114 &3266232143797861217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,6 +415,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c6600eb5d2a7eb42b06c8c6b46a4095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2126448865796671855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113995292624435506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c55061e1e73eb2941b8c9d43a342bbe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &225130368106103104
@@ -520,13 +546,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5138802710242822163}
   - component: {fileID: 5390842745815310454}
+  - component: {fileID: 4692928897173774167}
   m_Layer: 0
   m_Name: InteractVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5138802710242822163
 Transform:
   m_ObjectHideFlags: 0
@@ -555,14 +582,28 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 4421
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.7
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4692928897173774167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902592842880367971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53bdaad2831ec3347888cbb1b204a892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactablesInVolume: []
+  interactableInRange: 0
 --- !u!1 &4383756551677939109
 GameObject:
   m_ObjectHideFlags: 0

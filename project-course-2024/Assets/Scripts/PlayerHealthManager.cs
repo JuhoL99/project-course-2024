@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerHealthManager : MonoBehaviour
 {
     public static PlayerHealthManager instance;
-    private int maxHealth = 50;
-    [SerializeField] private int currentHealth;
+    private float maxHealth = 50;
+    [SerializeField] private float currentHealth;
 
     private void Awake()
     {

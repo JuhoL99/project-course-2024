@@ -140,7 +140,7 @@ public class EnemyNavigation : MonoBehaviour
     void CheckObstacles()
     {
         RaycastHit hit;
-        Vector3 castLocation = new Vector3(transform.position.x, transform.position.y-1, transform.position.z);
+        Vector3 castLocation = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         Debug.DrawRay(castLocation, transform.forward * 1.5f, Color.red, 20f);
         if (Physics.Raycast(castLocation, transform.forward, out hit, 1f, layerToHit.value))
         {

@@ -5,15 +5,6 @@ using UnityEngine;
 public class LockOnVolume : MonoBehaviour
 {
     public List<GameObject> enemiesInVolume = new List<GameObject>();
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter(Collider other)
     {
         enemiesInVolume.Add(other.gameObject);

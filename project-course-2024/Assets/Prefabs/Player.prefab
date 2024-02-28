@@ -41,6 +41,7 @@ Transform:
   m_Children:
   - {fileID: 8020813417259571045}
   - {fileID: 4517551190143047361}
+  - {fileID: 5138802710242822163}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8898748765088655662
@@ -312,6 +313,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: bbfbe23c-352a-4a6c-b4c2-8b290c6d40dc
     m_ActionName: PlayerMovement/DestroyMode[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 520fa72d-ac3a-4ae8-af37-ac0f1999c0b6
+    m_ActionName: PlayerMovement/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement
@@ -347,8 +352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d48e0528e35d7bd43b4109056bffae0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildAreaDimensions: {x: 10, y: 10}
-  buildAreaCenter: {x: 6, y: 6}
+  buildAreaDimensions: {x: 20, y: 20}
+  buildAreaCenter: {x: 0, y: 0}
   buildHeight: 10
   buildingBlocks:
   - {fileID: 3530987246762088181, guid: f56f25c1a78f4d049beb87df0b3d08a5, type: 3}
@@ -505,6 +510,59 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2902592842880367971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5138802710242822163}
+  - component: {fileID: 5390842745815310454}
+  m_Layer: 0
+  m_Name: InteractVolume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5138802710242822163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902592842880367971}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6472300832988388710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5390842745815310454
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902592842880367971}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4421
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.7
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4383756551677939109
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +574,7 @@ GameObject:
   - component: {fileID: 4517551190143047361}
   - component: {fileID: 6287582284956782582}
   - component: {fileID: 6693663661743919340}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: LockOnVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,10 +606,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8063
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0

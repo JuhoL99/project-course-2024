@@ -87,7 +87,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Gather",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "520fa72d-ac3a-4ae8-af37-ac0f1999c0b6",
                     "expectedControlType": "Button",
@@ -210,7 +210,7 @@
                 {
                     "name": "negative",
                     "id": "5046e291-9f9e-40f5-adac-cdb872da9947",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -221,7 +221,7 @@
                 {
                     "name": "positive",
                     "id": "201d9827-f200-4732-ad87-38f7abc5741f",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -265,11 +265,11 @@
                 {
                     "name": "",
                     "id": "4ed1c292-1a76-4833-b059-f199e5cf844a",
-                    "path": "<Keyboard>/g",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Gather",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

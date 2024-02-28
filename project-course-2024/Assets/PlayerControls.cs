@@ -109,7 +109,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Gather"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""520fa72d-ac3a-4ae8-af37-ac0f1999c0b6"",
                     ""expectedControlType"": ""Button"",
@@ -232,7 +232,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""5046e291-9f9e-40f5-adac-cdb872da9947"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -243,7 +243,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""201d9827-f200-4732-ad87-38f7abc5741f"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -287,11 +287,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4ed1c292-1a76-4833-b059-f199e5cf844a"",
-                    ""path"": ""<Keyboard>/g"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Gather"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -311,7 +311,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerMovement_LockOn = m_PlayerMovement.FindAction("LockOn", throwIfNotFound: true);
         m_PlayerMovement_Run = m_PlayerMovement.FindAction("Run", throwIfNotFound: true);
         m_PlayerMovement_DestroyMode = m_PlayerMovement.FindAction("DestroyMode", throwIfNotFound: true);
-        m_PlayerMovement_Gather = m_PlayerMovement.FindAction("Gather", throwIfNotFound: true);
+        m_PlayerMovement_Interact = m_PlayerMovement.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -382,7 +382,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_LockOn;
     private readonly InputAction m_PlayerMovement_Run;
     private readonly InputAction m_PlayerMovement_DestroyMode;
-    private readonly InputAction m_PlayerMovement_Gather;
+    private readonly InputAction m_PlayerMovement_Interact;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -396,7 +396,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @LockOn => m_Wrapper.m_PlayerMovement_LockOn;
         public InputAction @Run => m_Wrapper.m_PlayerMovement_Run;
         public InputAction @DestroyMode => m_Wrapper.m_PlayerMovement_DestroyMode;
-        public InputAction @Gather => m_Wrapper.m_PlayerMovement_Gather;
+        public InputAction @Interact => m_Wrapper.m_PlayerMovement_Interact;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -433,9 +433,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @DestroyMode.started += instance.OnDestroyMode;
             @DestroyMode.performed += instance.OnDestroyMode;
             @DestroyMode.canceled += instance.OnDestroyMode;
-            @Gather.started += instance.OnGather;
-            @Gather.performed += instance.OnGather;
-            @Gather.canceled += instance.OnGather;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -467,9 +467,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @DestroyMode.started -= instance.OnDestroyMode;
             @DestroyMode.performed -= instance.OnDestroyMode;
             @DestroyMode.canceled -= instance.OnDestroyMode;
-            @Gather.started -= instance.OnGather;
-            @Gather.performed -= instance.OnGather;
-            @Gather.canceled -= instance.OnGather;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -498,6 +498,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLockOn(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnDestroyMode(InputAction.CallbackContext context);
-        void OnGather(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

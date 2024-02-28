@@ -19,7 +19,6 @@ public class Movement : MonoBehaviour
     [SerializeField] bool walkInputting, onGroundLastFrame, running;
     public bool canMove = true;
     float ySpeed;
-    float groundedGravity = 0.1f;
 
     [Min(0f)] public float baseMoveSpeed, runMultiplier, baseJumpHeight, playerGravity, terminalVelocity;
     [Range(0,1)] public float turnLerpSpeed;
@@ -48,6 +47,9 @@ public class Movement : MonoBehaviour
 
         UpdateHorizontalMoveDir();
         CCMove();
+    }
+    void FixedUpdate()
+    {
     }
     void CCMove()
     {

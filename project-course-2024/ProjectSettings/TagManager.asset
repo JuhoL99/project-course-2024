@@ -17,9 +17,9 @@ TagManager:
   - DestructibleObject
   - Enemy
   - Resource
-  - 
-  - 
-  - 
+  - LockOnVolume
+  - Terrain
+  - BuildingBlock
   - 
   - 
   - 

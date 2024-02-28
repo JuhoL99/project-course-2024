@@ -12,39 +12,49 @@ public class LockOn : MonoBehaviour
     Transform cam;
     LockOnVolume lockOnVolume;
     CameraBeh cameraScript;
+    float lockOffRange;
     void Start()
     {
         buildScript = GetComponent<BuildAWall>();
-        lockOnVolume = transform.GetChild(1).GetComponent<LockOnVolume>();
+        lockOnVolume = GetComponentInChildren<LockOnVolume>();
         cam = Camera.main.transform;
         cameraScript = GetComponent<CameraBeh>();
+        lockOffRange = lockOnVolume.GetComponent<SphereCollider>().radius*1.4f;
     }
 
     void Update()
     {
-        LockedCameraUpdate();
+        LockedOnUpdate();
     }
-    void LockedCameraUpdate()
+    void LockedOnUpdate()
     {
         if (!lockedOn) return;
+        if (lockTarget == null || (lockTarget.position - transform.position).magnitude > lockOffRange) DeactivateLockOn();
     }
     public void OnLockOnInput(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed || buildScript.buildMode) return;
-        lockedOn = !lockedOn;
-        if (lockedOn) DeactivateLockOn(); else ActivateLockOn();
+        if (lockedOn)
+        {
+            DeactivateLockOn();
+        }
+        else
+        {
+            ActivateLockOn();
+        }
     }
     void ActivateLockOn()
     {
         GameObject target = FindClosestEnemyToReticle();
         if (target == null) return;
+        lockedOn = true;
         cameraScript.ActivateLockOn(target.transform);
-
-
+        lockTarget = target.transform;
     }
     void DeactivateLockOn()
     {
         cameraScript.DeactivateLockOn();
+        lockedOn = false;
     }
     GameObject FindClosestEnemyToReticle()
     {
@@ -53,8 +63,7 @@ public class LockOn : MonoBehaviour
         foreach (GameObject go in lockOnVolume.enemiesInVolume)
         {
             float enemyCamAngle = Vector3.Angle(go.transform.position - cam.position, cam.forward);
-
-            if (enemyCamAngle > smallestAngle)
+            if (enemyCamAngle < smallestAngle)
             {
                 smallestAngle = enemyCamAngle;
                 chosenEnemy = go;
@@ -62,5 +71,4 @@ public class LockOn : MonoBehaviour
         }
         return chosenEnemy;
     }
-    
 }

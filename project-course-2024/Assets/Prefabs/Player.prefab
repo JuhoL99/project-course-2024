@@ -347,6 +347,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6adbb44c95c196478ed85d53b273349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDir2: {x: 0, y: 0}
+  moveDir3: {x: 0, y: 0, z: 0}
+  walkInputting: 0
+  onGroundLastFrame: 0
+  running: 0
+  canMove: 1
   baseMoveSpeed: 6
   runMultiplier: 1.5
   baseJumpHeight: 3
@@ -440,7 +446,6 @@ GameObject:
   - component: {fileID: 8020813417259571045}
   - component: {fileID: 7819620566488569768}
   - component: {fileID: 974016452494557863}
-  - component: {fileID: 6550055490648914592}
   m_Layer: 3
   m_Name: Nose
   m_TagString: Untagged
@@ -513,29 +518,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6550055490648914592
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 225130368106103104}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2902592842880367971
 GameObject:
   m_ObjectHideFlags: 0

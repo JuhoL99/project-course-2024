@@ -77,6 +77,9 @@ GameObject:
   - component: {fileID: 8706975515023661733}
   - component: {fileID: 4706417526098949665}
   - component: {fileID: 3813057316721135655}
+  - component: {fileID: -2076943493483216769}
+  - component: {fileID: 1516768639074018960}
+  - component: {fileID: -432842403639898168}
   m_Layer: 6
   m_Name: Gate
   m_TagString: Untagged
@@ -186,3 +189,63 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 20
   navMeshManager: {fileID: 0}
+--- !u!114 &-2076943493483216769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5324123287656592607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffe44289cbadba8478d8c8d6193ca258, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gate: {fileID: 0}
+  closedPos: {x: 0, y: 0, z: 0}
+  openHeight: 5
+  opening: 0
+  closing: 0
+  openingSpeed: 0
+--- !u!54 &1516768639074018960
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5324123287656592607}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &-432842403639898168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5324123287656592607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3bbdfeb233dbc49b35b5a9b806acb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredResources:
+  - Iron
+  requiredAmounts: 02000000

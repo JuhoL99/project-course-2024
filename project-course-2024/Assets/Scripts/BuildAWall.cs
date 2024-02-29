@@ -29,6 +29,7 @@ public class BuildAWall : MonoBehaviour
     Vector3 pointingPos;
     LayerMask destroyRaycastLayer, terrainLayer;
     bool canBuildHere = true;
+    PlayerManager playerManager;
     void Start()
     {
         halfArea = buildAreaDimensions / 2;
@@ -47,6 +48,7 @@ public class BuildAWall : MonoBehaviour
         }
         destroyRaycastLayer = LayerMask.GetMask(new string[]{"BuildingBlock","DestructibleObject"});
         terrainLayer = 1<<LayerMask.NameToLayer("Terrain");
+        playerManager = GetComponent<PlayerManager>();
     }
 
     void Update()
@@ -130,7 +132,6 @@ public class BuildAWall : MonoBehaviour
     {
         if (!(ctx.performed && buildMode)) return;
         destroyMode = !destroyMode;
-        print(destroyMode);
         SwitchDestroyMode(destroyMode);
     }
     public void OnFireInput(InputAction.CallbackContext ctx)
@@ -202,7 +203,33 @@ public class BuildAWall : MonoBehaviour
     void BuildObject()
     {
         if (!canBuildHere) return;
-        GameObject newObject = Instantiate(buildingBlocks[chosenBuildingBlockIndex], 
+
+        GameObject chosenPrefab = buildingBlocks[chosenBuildingBlockIndex];
+
+        //Check if enough resources
+        BuildingBlock buildingBlockScript = chosenPrefab.GetComponent<BuildingBlock>();
+        string[] requiredResources = buildingBlockScript.requiredResources;
+        int[] requiredAmounts = buildingBlockScript.requiredAmounts;
+        int[] requiredResourcesByResourceNum = new int[playerManager.currentResources.Length];
+        for (int i = 0; i < requiredResources.Length; i++)
+        {
+            int resourceNum = playerManager.nameToResourceNum[requiredResources[i]];
+            if (requiredAmounts[i] > playerManager.currentResources[resourceNum])
+            {
+                print("Not enough resources!");
+                return;
+            }
+            requiredResourcesByResourceNum[resourceNum] += requiredAmounts[i];
+        }
+
+        //Subtract required resources from current resources
+        for (int i = 0; i < playerManager.currentResources.Length; i++)
+        {
+            playerManager.currentResources[i] -= requiredResourcesByResourceNum[i];
+        }
+
+        //Build object
+        GameObject newObject = Instantiate(chosenPrefab, 
             ghostObject.transform.position-Vector3.up*0.01f, ghostObject.transform.rotation);
         builtObjectsMatrix[squareIndex.x, squareIndex.y] = newObject;
         prefabIndexMatrix[squareIndex.x, squareIndex.y] = chosenBuildingBlockIndex;

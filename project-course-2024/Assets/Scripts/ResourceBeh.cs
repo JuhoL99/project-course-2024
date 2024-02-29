@@ -13,7 +13,7 @@ public class ResourceBeh : MonoBehaviour, InteractInterface
         PlayerManager manager = player.GetComponent<PlayerManager>();
         manager.currentResources[manager.nameToResourceNum[resourceName]]++;
         print(manager.currentResources.ToCommaSeparatedString());
-        player.GetComponentInChildren<InteractVolume>().interactablesInVolume.Remove(gameObject); 
+        player.GetComponentInChildren<InteractVolume>().RemoveInteractableFromRange(gameObject); 
         Destroy(gameObject);
     }
 }

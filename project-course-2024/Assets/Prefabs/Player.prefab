@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 5581241470862625365}
   - component: {fileID: 24223492386615030}
   - component: {fileID: 807983106974727042}
+  - component: {fileID: 2285330365003645000}
   - component: {fileID: 501513025520350122}
   - component: {fileID: 8236519743458253987}
   - component: {fileID: 326178277238157215}
-  - component: {fileID: 2285330365003645000}
   - component: {fileID: 3266232143797861217}
   - component: {fileID: 2126448865796671855}
   m_Layer: 3
@@ -330,11 +330,40 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 520fa72d-ac3a-4ae8-af37-ac0f1999c0b6
     m_ActionName: PlayerMovement/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2285330365003645000}
+        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
+        m_MethodName: OnResourceCheat
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9b91c218-5255-452d-a603-aabe6a4a7175
+    m_ActionName: PlayerMovement/ResourceCheat[/Keyboard/i]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &2285330365003645000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113995292624435506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a94a2be7591bee4381673941a55efb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentResources: 
 --- !u!114 &501513025520350122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,7 +387,7 @@ MonoBehaviour:
   baseJumpHeight: 3
   playerGravity: 30
   terminalVelocity: 0
-  turnLerpSpeed: 0.1
+  turnLerpSpeed: 0.3
 --- !u!114 &8236519743458253987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,19 +427,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnRange: 20
---- !u!114 &2285330365003645000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113995292624435506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a94a2be7591bee4381673941a55efb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentResources: 
 --- !u!114 &3266232143797861217
 MonoBehaviour:
   m_ObjectHideFlags: 0

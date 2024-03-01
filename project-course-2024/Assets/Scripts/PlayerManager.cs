@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -30,5 +33,14 @@ public class PlayerManager : MonoBehaviour
             { "Egg Food", 3 }
         };
         currentResources = new int[nameToResourceNum.Count];
+    }
+    public void OnResourceCheat(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        for (int i = 0; i < currentResources.Length; i++)
+        {
+            currentResources[i] += 10;
+        }
+        print(currentResources.ToCommaSeparatedString());
     }
 }

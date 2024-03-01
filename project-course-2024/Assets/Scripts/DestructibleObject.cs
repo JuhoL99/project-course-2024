@@ -23,15 +23,7 @@ public class DestructibleObject : MonoBehaviour
         {
             gameObject.SetActive(false);
             //navMeshManager.RebakeNavMesh();
-            if(transform.parent != null)
-            {
-                Destroy(transform.parent.gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-            
+            Destroy(gameObject);
         }
     }
 }

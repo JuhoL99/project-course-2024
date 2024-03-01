@@ -8,7 +8,6 @@ public class InteractVolume : MonoBehaviour
     public bool interactableInRange;
     private void OnTriggerEnter(Collider other)
     {
-        print(other.name);
         if (other.gameObject.TryGetComponent(out InteractInterface component))
         {
             interactablesInVolume.Add(other.gameObject);

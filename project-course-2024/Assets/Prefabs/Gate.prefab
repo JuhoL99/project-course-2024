@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8343191617073582564}
   - component: {fileID: 7540943836540681892}
-  - component: {fileID: 906874284381487644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,21 +48,6 @@ MonoBehaviour:
   m_Center: {x: 0, y: 0, z: 0}
   m_Area: 3
   m_AffectedAgents: ffffffff
---- !u!114 &906874284381487644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307664454281347199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea70ec46cdaabf94c9a7a24c7f35acc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 0
-  navMeshManager: {fileID: 0}
 --- !u!1 &5324123287656592607
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,10 +60,10 @@ GameObject:
   - component: {fileID: 9077466241340416287}
   - component: {fileID: 8706975515023661733}
   - component: {fileID: 4706417526098949665}
-  - component: {fileID: 3813057316721135655}
   - component: {fileID: -2076943493483216769}
   - component: {fileID: 1516768639074018960}
   - component: {fileID: -432842403639898168}
+  - component: {fileID: 8576468434349791499}
   m_Layer: 6
   m_Name: Gate
   m_TagString: Untagged
@@ -174,21 +158,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3813057316721135655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5324123287656592607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea70ec46cdaabf94c9a7a24c7f35acc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 20
-  navMeshManager: {fileID: 0}
 --- !u!114 &-2076943493483216769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,3 +218,18 @@ MonoBehaviour:
   requiredResources:
   - Iron
   requiredAmounts: 02000000
+--- !u!114 &8576468434349791499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5324123287656592607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea70ec46cdaabf94c9a7a24c7f35acc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  maxHealth: 20
+  navMeshManager: {fileID: 0}

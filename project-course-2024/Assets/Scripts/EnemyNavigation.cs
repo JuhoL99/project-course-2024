@@ -45,6 +45,9 @@ public class EnemyNavigation : MonoBehaviour
     public Vector3 moveAmount;
     private bool isDead = false;
 
+    Egg eggScript;
+    public int damageToEgg = 20;
+
     private void Start()
     {
         enemyManager = GetComponent<EnemyManager>();
@@ -53,6 +56,7 @@ public class EnemyNavigation : MonoBehaviour
         player = PlayerManager.instance;
         playerHealthManager = PlayerHealthManager.instance;
         egg = GameObject.FindWithTag("MainTarget");
+        eggScript = egg.GetComponent<Egg>();
         mainGoal = egg.transform.position;
     }
     private void Update()
@@ -111,7 +115,7 @@ public class EnemyNavigation : MonoBehaviour
             float distance = Vector3.Distance(transform.position, mainGoal);
             if(distance < 1.5 && !isDead)
             {
-                Death();
+                DamageEggAndDie();
             }
         }
     }
@@ -192,11 +196,12 @@ public class EnemyNavigation : MonoBehaviour
             enemyManager.State = EnemyState.MainGoal;
         }
     }
-    void Death()
+    void DamageEggAndDie()
     {
         Destroy(gameObject, 4f);
         isDead = true;
         playerHealthManager.TakeDamage(1);
+        eggScript.ChangeHealth(-damageToEgg);
         return;
     }
 }

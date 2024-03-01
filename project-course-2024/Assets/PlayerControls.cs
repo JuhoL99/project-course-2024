@@ -116,6 +116,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResourceCheat"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b91c218-5255-452d-a603-aabe6a4a7175"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -294,6 +303,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6cc67224-bd9a-4dd0-97da-2a8d5b166fb1"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResourceCheat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -312,6 +332,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerMovement_Run = m_PlayerMovement.FindAction("Run", throwIfNotFound: true);
         m_PlayerMovement_DestroyMode = m_PlayerMovement.FindAction("DestroyMode", throwIfNotFound: true);
         m_PlayerMovement_Interact = m_PlayerMovement.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerMovement_ResourceCheat = m_PlayerMovement.FindAction("ResourceCheat", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -383,6 +404,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Run;
     private readonly InputAction m_PlayerMovement_DestroyMode;
     private readonly InputAction m_PlayerMovement_Interact;
+    private readonly InputAction m_PlayerMovement_ResourceCheat;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -397,6 +419,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_PlayerMovement_Run;
         public InputAction @DestroyMode => m_Wrapper.m_PlayerMovement_DestroyMode;
         public InputAction @Interact => m_Wrapper.m_PlayerMovement_Interact;
+        public InputAction @ResourceCheat => m_Wrapper.m_PlayerMovement_ResourceCheat;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -436,6 +459,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @ResourceCheat.started += instance.OnResourceCheat;
+            @ResourceCheat.performed += instance.OnResourceCheat;
+            @ResourceCheat.canceled += instance.OnResourceCheat;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -470,6 +496,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @ResourceCheat.started -= instance.OnResourceCheat;
+            @ResourceCheat.performed -= instance.OnResourceCheat;
+            @ResourceCheat.canceled -= instance.OnResourceCheat;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -499,5 +528,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnDestroyMode(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnResourceCheat(InputAction.CallbackContext context);
     }
 }

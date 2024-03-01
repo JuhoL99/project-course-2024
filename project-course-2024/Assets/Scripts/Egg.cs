@@ -2,10 +2,17 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Egg : MonoBehaviour, InteractInterface
 {
-    public int health = 100;
+    [SerializeField] private Slider slider;
+    [SerializeField] int health = 100;
+    public int maxHealth = 100;
+    void Start()
+    {
+        slider.value = (health / (float)maxHealth) * 100;
+    }
     public void GetInteracted(GameObject player)
     {
         //Check if player has egg food and heal if does
@@ -24,6 +31,8 @@ public class Egg : MonoBehaviour, InteractInterface
     public void ChangeHealth(int amount)
     {
         health += amount;
+        health = Mathf.Clamp(health, 0, maxHealth);
+        slider.value = (health/(float)maxHealth)*100;
         if (health <= 0)
         {
             Death();

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerWeapon : MonoBehaviour
 {
-    private Collider collider;
+    private Collider coll;
     // Start is called before the first frame update
     void Start()
     {
-        collider = GetComponent<Collider>();
-        collider.enabled = false;
+        coll = GetComponent<Collider>();
+        coll.enabled = false;
     }
 
     // Update is called once per frame
@@ -19,7 +19,7 @@ public class PlayerWeapon : MonoBehaviour
     }
     public void EnableWeaponRight(bool value)
     {
-        collider.enabled = value;
+        coll.enabled = value;
         Debug.Log("Works");
     }
 

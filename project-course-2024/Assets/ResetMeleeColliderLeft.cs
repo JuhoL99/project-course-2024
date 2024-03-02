@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResetMeleeCollider : StateMachineBehaviour
+public class ResetMeleeColliderLeft : StateMachineBehaviour
 {
 
     //nStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerWeapon fist = GameObject.FindWithTag("WeaponRight").GetComponent<PlayerWeapon>();
-        fist.EnableWeaponRight(true);
-        
+        PlayerWeapon fist = GameObject.FindWithTag("FistLeft").GetComponent<PlayerWeapon>();
+        fist.EnableWeapon(true);
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -22,13 +22,13 @@ public class ResetMeleeCollider : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerWeapon fist = GameObject.FindWithTag("WeaponRight").GetComponent<PlayerWeapon>();
-        fist.EnableWeaponRight(false);
+        PlayerWeapon fist = GameObject.FindWithTag("FistLeft").GetComponent<PlayerWeapon>();
+        fist.EnableWeapon(false);
         GameObject playerObject = GameObject.Find("Player");
-        if(playerObject != null)
+        if (playerObject != null)
         {
             Movement moveScript = playerObject.GetComponent<Movement>();
-            if(moveScript != null)
+            if (moveScript != null)
             {
                 moveScript.canMove = true;
             }

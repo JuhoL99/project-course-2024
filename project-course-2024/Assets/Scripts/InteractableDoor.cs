@@ -21,6 +21,8 @@ public class InteractableDoor : MonoBehaviour, InteractInterface
     public void GetInteracted(GameObject player)
     {
         Debug.Log("interacted");
+        player.GetComponentInChildren<InteractVolume>().interactablesInVolume.Remove(gameObject);
+
         ToggleGate();
     }
     void Update()

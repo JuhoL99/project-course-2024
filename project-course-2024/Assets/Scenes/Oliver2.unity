@@ -12879,6 +12879,7 @@ MonoBehaviour:
   - {fileID: 2531886586074316514, guid: 6e37afc719492eb41a4cd5b07c653f9e, type: 3}
   - {fileID: 4234008842528754427, guid: 248ded76260194146afd07e950b2f445, type: 3}
   - {fileID: 675058004517200701, guid: 7959b89f6cf8e6545bc78e7a38a491ab, type: 3}
+  worldResourceCount: 0
 --- !u!4 &1433826280
 Transform:
   m_ObjectHideFlags: 0

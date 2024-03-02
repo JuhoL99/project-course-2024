@@ -55,13 +55,20 @@ public class LockOn : MonoBehaviour
     {
         cameraScript.DeactivateLockOn();
         lockedOn = false;
+        lockTarget = null;
     }
     GameObject FindClosestEnemyToReticle()
     {
         float smallestAngle = 90f;
         GameObject chosenEnemy = null;
-        foreach (GameObject go in lockOnVolume.enemiesInVolume)
+        GameObject[] enemiesInVolume = lockOnVolume.enemiesInVolume.ToArray();
+        foreach (GameObject go in enemiesInVolume)
         {
+            if (go == null)
+            {
+                lockOnVolume.enemiesInVolume.Remove(go); 
+                continue;
+            }
             float enemyCamAngle = Vector3.Angle(go.transform.position - cam.position, cam.forward);
             if (enemyCamAngle < smallestAngle)
             {

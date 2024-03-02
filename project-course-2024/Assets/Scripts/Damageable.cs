@@ -22,7 +22,12 @@ public class Damageable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Kill test
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Destroy(gameObject);
+        }
+
     }
     public void GetHitLoser()
     {

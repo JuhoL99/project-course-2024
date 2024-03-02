@@ -9,19 +9,43 @@ public class Egg : MonoBehaviour, InteractInterface
     [SerializeField] private Slider slider;
     [SerializeField] int health = 100;
     public int maxHealth = 100;
+    public float hungerInterval;
+    float hungerTimer;
     void Start()
     {
         slider.value = (health / (float)maxHealth) * 100;
+        hungerTimer = hungerInterval;
     }
+    void Update()
+    {
+        Hunger();   
+    }
+    void Hunger()
+    {
+        hungerTimer -= Time.deltaTime;
+        if (hungerTimer < 0)
+        {
+            hungerTimer = hungerInterval;
+            ChangeHealth(-1);
+        }
+    } 
     public void GetInteracted(GameObject player)
     {
         //Check if player has egg food and heal if does
+        print("Egg interacted");
         PlayerManager playerManager = player.GetComponent<PlayerManager>();
         int eggNum = playerManager.nameToResourceNum["Egg Food"];
         if (playerManager.currentResources[eggNum] > 0)
         {
-            ChangeHealth(20);
-            playerManager.currentResources[eggNum]--;
+            if (health == maxHealth)
+            {
+                print("The egg is satisfied.");
+            }
+            else
+            {
+                ChangeHealth(20);
+                playerManager.currentResources[eggNum]--;
+            }
         }
         else
         {

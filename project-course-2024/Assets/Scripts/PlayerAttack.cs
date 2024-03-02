@@ -5,10 +5,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private int currentComboPhase = 0;
+    /*private int currentComboPhase = 0;
     private float lastInputTime;
     private float comboTimer = 1f;
-    private bool isAttacking;
+    private bool isAttacking;*/
     [SerializeField] private AnimationClip[] comboSteps;
     [SerializeField] private Animator playerAnim;
     BuildAWall builder;

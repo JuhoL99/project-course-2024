@@ -6,6 +6,7 @@ using UnityEngine;
 public class ResourceBeh : MonoBehaviour, InteractInterface
 {
     public string resourceName;
+    [System.NonSerialized] public ResourceSpawner spawnerScript;
     void Start() { 
     }
     public void GetInteracted(GameObject player)
@@ -13,7 +14,8 @@ public class ResourceBeh : MonoBehaviour, InteractInterface
         PlayerManager manager = player.GetComponent<PlayerManager>();
         manager.currentResources[manager.nameToResourceNum[resourceName]]++;
         print(manager.currentResources.ToCommaSeparatedString());
-        player.GetComponentInChildren<InteractVolume>().RemoveInteractableFromRange(gameObject); 
+        player.GetComponentInChildren<InteractVolume>().RemoveInteractableFromRange(gameObject);
+        spawnerScript.worldResourceCount--;
         Destroy(gameObject);
     }
 }

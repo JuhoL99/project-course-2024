@@ -20,7 +20,6 @@ public class InteractableDoor : MonoBehaviour, InteractInterface
     }
     public void GetInteracted(GameObject player)
     {
-        Debug.Log("Door interacted");
         ToggleGate();
     }
     void Update()

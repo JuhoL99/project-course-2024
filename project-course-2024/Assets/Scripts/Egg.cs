@@ -32,7 +32,6 @@ public class Egg : MonoBehaviour, InteractInterface
     public void GetInteracted(GameObject player)
     {
         //Check if player has egg food and heal if does
-        print("Egg interacted");
         PlayerManager playerManager = player.GetComponent<PlayerManager>();
         int eggNum = playerManager.nameToResourceNum["Egg Food"];
         if (playerManager.currentResources[eggNum] > 0)

@@ -9,12 +9,15 @@ public enum EnemyState
     MainGoal,
     ClearObstacle,
     ChasePlayer,
+    Spawn,
     ReturnCamp,
 }
 public class EnemyManager : MonoBehaviour
 {
     EnemyNavigation navigation;
+    [SerializeField] private Animator enemyAnim;
     [SerializeField] private EnemyState state;
+    private bool hasSpawned = false;
     void Start()
     {
         navigation = GetComponent<EnemyNavigation>();
@@ -33,6 +36,14 @@ public class EnemyManager : MonoBehaviour
     public void OnSpawn()
     {
         //set spawn state, change to idle first and main at night?
+        State = EnemyState.Spawn;
+        StartCoroutine(SpawnCoroutine());
+        
+    }
+    private IEnumerator SpawnCoroutine()
+    {
+        enemyAnim.Play("Summon");
+        yield return new WaitForSeconds(enemyAnim.GetCurrentAnimatorStateInfo(0).length);
         State = EnemyState.MainGoal;
     }
     private void StateChange()
@@ -52,6 +63,8 @@ public class EnemyManager : MonoBehaviour
                     navigation.ClearObstacle();
                     break;
                 case EnemyState.ReturnCamp:
+                    break;
+                case EnemyState.Spawn:
                     break;
                 default:
                     break;

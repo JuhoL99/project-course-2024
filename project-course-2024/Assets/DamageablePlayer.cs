@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class DamageablePlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int health;
+    [SerializeField] private int maxHealth = 20;
+    private void Start()
     {
-        
+        health = maxHealth;
     }
-
-    // Update is called once per frame
-    void Update()
+    public void GetHitLoser()
     {
-        
+        TakeDamage();
+    }
+    private void TakeDamage()
+    {
+        health -= 2;
+        HealthCheck();
+    }
+    private void HealthCheck()
+    {
+        if (health <= 0)
+            Destroy(gameObject);
     }
 }

@@ -47,6 +47,7 @@ public class EnemyNavigation : MonoBehaviour
     public Vector3 moveAmount;
     private bool isDead = false;
     private bool isAttacking = false;
+    [SerializeField] private Collider weaponCollider;
 
     private void Start()
     {
@@ -211,13 +212,12 @@ public class EnemyNavigation : MonoBehaviour
     }
     private IEnumerator AttackAnimation()
     {
+        weaponCollider.enabled = true; agent.isStopped = true; isAttacking = true;
         agent.speed = 1;
-        agent.isStopped = true;
-        isAttacking = true;
         enemyAnim.Play("Hit2");
         yield return new WaitForSeconds(enemyAnim.GetCurrentAnimatorStateInfo(0).length);
-        isAttacking = false;
-        agent.isStopped = false;
+        isAttacking = false; agent.isStopped = false; weaponCollider.enabled = false;
         agent.speed = 2;
+        
     }
 }

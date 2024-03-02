@@ -4692,6 +4692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c69be9369f03b459256d7f671747e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 20
 --- !u!1 &958946858
 GameObject:
   m_ObjectHideFlags: 0
@@ -6435,7 +6436,7 @@ PrefabInstance:
     - target: {fileID: 9151856065910248300, guid: 6455a6bf736592740a311bf2ddd59485,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9262,25 +9263,10 @@ PrefabInstance:
       propertyPath: egg
       value: 
       objectReference: {fileID: 1755400913}
-    - target: {fileID: 1673222229858601094, guid: 6455a6bf736592740a311bf2ddd59485,
-        type: 3}
-      propertyPath: attackRange
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7120079598246981520, guid: 6455a6bf736592740a311bf2ddd59485,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8587283698784019525, guid: 6455a6bf736592740a311bf2ddd59485,
-        type: 3}
-      propertyPath: m_Speed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9151856065910248300, guid: 6455a6bf736592740a311bf2ddd59485,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9688,7 +9674,7 @@ PrefabInstance:
     - target: {fileID: 9151856065910248300, guid: 6455a6bf736592740a311bf2ddd59485,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9817,6 +9803,11 @@ PrefabInstance:
     - target: {fileID: 113995292624435506, guid: c9a3dcd4c8db37c4ca70f3fb421a2c9d,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 113995292624435506, guid: c9a3dcd4c8db37c4ca70f3fb421a2c9d,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 807983106974727042, guid: c9a3dcd4c8db37c4ca70f3fb421a2c9d,

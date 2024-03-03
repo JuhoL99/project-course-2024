@@ -18,31 +18,31 @@ public class Damageable : MonoBehaviour
         slider.UpdateValue(1);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Kill test
+        // Kill cheat
         if (Input.GetKeyDown(KeyCode.K))
         {
             Destroy(gameObject);
         }
-
     }
-    public void GetHitLoser(float knockbackAmount)
+    public void GetHitLoser(float knockbackAmount, int damage)
     {
-        TakeDamage();
+        TakeDamage(damage);
         navigationScript.KnockBack(knockbackAmount);
-        //Destroy(gameObject);
     }
-    private void TakeDamage()
+    private void TakeDamage(int damage)
     {
-        health -= 5;
+        health -= damage;
         HealthCheck();
     }
     private void HealthCheck()
     {
         slider.UpdateValue(health/maxHealth);
         if(health <= 0)
+        {
             Destroy(gameObject);
+            print("Destroyed");
+        }
     }
 }

@@ -46,7 +46,6 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
-        print(canMoveDeprecated);
         UpdateHorizontalMoveDir();
         CCMove();
         AnimUpdate();
@@ -101,7 +100,6 @@ public class Movement : MonoBehaviour
             movementVector = new Vector3(moveDir2.x, 0, moveDir2.y) * moveSpeed;
         }
         movementVector.y = ySpeed;
-        print(movementVector);
         cc.Move(movementVector*Time.deltaTime);
         onGroundLastFrame = cc.isGrounded;
     }

@@ -17,7 +17,6 @@ public class EnemyWeapon : MonoBehaviour
             wCollider.enabled = false;
             DamageablePlayer dmg = other.gameObject.GetComponent<DamageablePlayer>();
             dmg.GetHitLoser();
-            Debug.Log("Hit player");
         }
     }
 }

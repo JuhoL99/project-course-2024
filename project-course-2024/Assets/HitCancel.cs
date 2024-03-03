@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResetActionBackup : StateMachineBehaviour
+public class HitCancel : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    public float canCancelAfter;
+    bool canCancel;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        GameObject playerObject = GameObject.Find("Player");
-        if (playerObject != null)
-        {
-            Movement moveScript = playerObject.GetComponent<Movement>();
-            if (moveScript != null)
-            {
-                moveScript.canMoveDeprecated = true;
-            }
-        }
+        canCancel = false;
+        animator.SetBool("CanCancelToNextHit", false);
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (stateInfo.normalizedTime > canCancelAfter && !canCancel && !animator.IsInTransition(0))
+        {
+            canCancel = true;
+            animator.SetBool("CanCancelToNextHit", true);
+        }
+            
+    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

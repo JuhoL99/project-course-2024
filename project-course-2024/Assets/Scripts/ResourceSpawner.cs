@@ -55,7 +55,6 @@ public class ResourceSpawner : MonoBehaviour
         float randomAngle = Random.Range(0, tau);
         Vector2 xz = new Vector2(Mathf.Sin(randomAngle), Mathf.Cos(randomAngle))
             * (spawnOutsideRadius + Random.Range(0, radiusDiff));
-        print(xz);
         float terrainHeight;
         if (Physics.Raycast(new Vector3(xz.x, 100, xz.y), Vector3.down, out RaycastHit hitInfo, 200, terrainLayer))
         {

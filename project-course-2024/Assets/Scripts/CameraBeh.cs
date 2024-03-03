@@ -12,6 +12,7 @@ public class CameraBeh : MonoBehaviour
     float camOrigYSpeed, camOrigXSpeed, lerpTarget;
     Transform lockOnTarget, cam;
     Movement moveScript;
+    public float lockOnAngle;
     void Start()
     {
         freeLook = GameObject.Find("FreeLook Camera").GetComponent<CinemachineFreeLook>();
@@ -46,7 +47,8 @@ public class CameraBeh : MonoBehaviour
     {
         if (!lockOn || lockOnTarget == null) return;
         Vector3 playerToEnemy = lockOnTarget.position - transform.position;
-        freeLook.m_XAxis.Value = Mathf.Rad2Deg * Mathf.Atan2(playerToEnemy.x, playerToEnemy.z);
+        lockOnAngle = Mathf.Rad2Deg * Mathf.Atan2(playerToEnemy.x, playerToEnemy.z);
+        freeLook.m_XAxis.Value = lockOnAngle;
             //+ Vector2.Dot(moveScript.moveDir2.normalized, new Vector2(cam.forward.z,cam.forward.x).normalized) * 30f;
     }
     public void SetBuildCameraEnabled(bool enabled)

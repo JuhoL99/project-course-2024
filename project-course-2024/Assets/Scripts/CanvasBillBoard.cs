@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CanvasBillBoard : MonoBehaviour
 {
-    Camera cam;
+    Transform cam;
     void Start()
     {
-        cam = Camera.main;        
+        cam = Camera.main.transform;        
     }
 
     void Update()
     {
-        transform.LookAt(cam.transform.position);
+        transform.LookAt(transform.position-cam.forward);
     }
 }

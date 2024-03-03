@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
     public bool isAttacking = false;
     [SerializeField] private string[] comboSteps;
     [SerializeField] private int currentComboPhase = 0;
-    [SerializeField] private Animator playerAnim;
+    Animator playerAnim;
     BuildAWall builder;
     private Movement movementScript;
 
@@ -18,10 +18,7 @@ public class PlayerAttack : MonoBehaviour
     {
         builder = GetComponent<BuildAWall>();
         movementScript = GetComponent<Movement>();
-    }
-    private void Update()
-    {
-
+        playerAnim = GetComponent<Animator>();
     }
     public void OnFireInput(InputAction.CallbackContext ctx)
     {
@@ -35,7 +32,7 @@ public class PlayerAttack : MonoBehaviour
         {
             currentComboPhase = 0;
         }
-        movementScript.canMove = false;
+        movementScript.canMoveDeprecated = false;
         if(!isAttacking)
         {
             StartCoroutine(AttackAnimation());

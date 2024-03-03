@@ -11,6 +11,7 @@ public class LockOn : MonoBehaviour
     Transform lockTarget;
     Transform cam;
     LockOnVolume lockOnVolume;
+    Animator anim;
     CameraBeh cameraScript;
     float lockOffRange;
     void Start()
@@ -20,6 +21,7 @@ public class LockOn : MonoBehaviour
         cam = Camera.main.transform;
         cameraScript = GetComponent<CameraBeh>();
         lockOffRange = lockOnVolume.GetComponent<SphereCollider>().radius*1.4f;
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -48,6 +50,7 @@ public class LockOn : MonoBehaviour
         GameObject target = FindClosestEnemyToReticle();
         if (target == null) return;
         lockedOn = true;
+        anim.SetBool("LockedOn",true);
         cameraScript.ActivateLockOn(target.transform);
         lockTarget = target.transform;
     }
@@ -55,6 +58,7 @@ public class LockOn : MonoBehaviour
     {
         cameraScript.DeactivateLockOn();
         lockedOn = false;
+        anim.SetBool("LockedOn", false);
         lockTarget = null;
     }
     GameObject FindClosestEnemyToReticle()

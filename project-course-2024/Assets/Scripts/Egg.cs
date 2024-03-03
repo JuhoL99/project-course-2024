@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class Egg : MonoBehaviour, InteractInterface
 {
-    [SerializeField] private Slider slider;
+    [SerializeField] private Healthbar slider;
     [SerializeField] int health = 100;
     public int maxHealth = 100;
     public float hungerInterval;
     float hungerTimer;
     void Start()
     {
-        slider.value = (health / (float)maxHealth) * 100;
+        slider.UpdateValue(1);
         hungerTimer = hungerInterval;
     }
     void Update()
@@ -55,7 +55,7 @@ public class Egg : MonoBehaviour, InteractInterface
     {
         health += amount;
         health = Mathf.Clamp(health, 0, maxHealth);
-        slider.value = (health/(float)maxHealth)*100;
+        slider.UpdateValue(health/(float)maxHealth);
         if (health <= 0)
         {
             Death();

@@ -8,15 +8,14 @@ public class Damageable : MonoBehaviour
     private int health;
     [SerializeField] private int maxHealth = 20;
     EnemyNavigation navigationScript;
-    [SerializeField] private Slider slider;
+    [SerializeField] private Healthbar slider;
 
     // Start is called before the first frame update
     void Start()
     {
         navigationScript = GetComponent<EnemyNavigation>();
         health = maxHealth;
-        slider.maxValue = maxHealth;
-        slider.value = health;
+        slider.UpdateValue(1);
     }
 
     // Update is called once per frame
@@ -42,7 +41,7 @@ public class Damageable : MonoBehaviour
     }
     private void HealthCheck()
     {
-        slider.value = health;
+        slider.UpdateValue(health/maxHealth);
         if(health <= 0)
             Destroy(gameObject);
     }

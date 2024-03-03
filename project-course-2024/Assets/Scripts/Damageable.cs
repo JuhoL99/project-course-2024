@@ -38,7 +38,7 @@ public class Damageable : MonoBehaviour
     }
     private void HealthCheck()
     {
-        slider.UpdateValue(health/maxHealth);
+        slider.UpdateValue(health/(float)maxHealth);
         if(health <= 0)
         {
             Destroy(gameObject);

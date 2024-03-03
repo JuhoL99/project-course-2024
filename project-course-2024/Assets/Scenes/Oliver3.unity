@@ -315,7 +315,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431915192}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28874442, y: 0.000000032966476, z: -0.000000009942369, w: 0.9574062}
+  m_LocalRotation: {x: 0.28874442, y: 0.000000032946996, z: -0.000000009936493, w: 0.9574062}
   m_LocalPosition: {x: -4.33, y: 20.41, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -683,6 +683,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 807983106974727042, guid: 26951a11b7dc2e54eb7068f795620fee,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 807983106974727042, guid: 26951a11b7dc2e54eb7068f795620fee,
         type: 3}
@@ -1915,12 +1920,12 @@ PrefabInstance:
     - target: {fileID: 2292640231307331192, guid: 99edae0b2dadc4b489057d35f459b543,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016512423
+      value: 0.000000016473502
       objectReference: {fileID: 0}
     - target: {fileID: 2292640231307331192, guid: 99edae0b2dadc4b489057d35f459b543,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000049799853
+      value: -0.000000004968247
       objectReference: {fileID: 0}
     - target: {fileID: 3905017611439397533, guid: 99edae0b2dadc4b489057d35f459b543,
         type: 3}
@@ -1995,12 +2000,12 @@ PrefabInstance:
     - target: {fileID: 7837250239166898809, guid: 99edae0b2dadc4b489057d35f459b543,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000001653068
+      value: -0.000000016609036
       objectReference: {fileID: 0}
     - target: {fileID: 7837250239166898809, guid: 99edae0b2dadc4b489057d35f459b543,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000044731867
+      value: 0.0000000044943893
       objectReference: {fileID: 0}
     - target: {fileID: 8360986055695414570, guid: 99edae0b2dadc4b489057d35f459b543,
         type: 3}
@@ -2885,6 +2890,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc98908faccf684293d3a5cd57f7542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2137553848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137553841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 0bd27bdb48159c8428b7900bb02059a2,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 63ba99fe-73e0-4ba9-8892-9abbd8dfa2dd
+    m_ActionName: PlayerMovement/Walk[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6fbdf80e-610f-44cd-9481-75b8098fd008
+    m_ActionName: PlayerMovement/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8b64e77d-8e89-4cfc-a2ba-f12718fdea30
+    m_ActionName: PlayerMovement/Fire[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 69d7e0b0-062e-40c3-80ad-55f198bef001
+    m_ActionName: PlayerMovement/Build[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f1cc185f-798a-4a4f-b588-d46f384dba8f
+    m_ActionName: PlayerMovement/CycleBuildBlocks[/Mouse/scroll/y]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 20995f29-a7f6-4e2e-8b4a-29f561b4a2ca
+    m_ActionName: PlayerMovement/CycleBuildRotation[/Keyboard/1,/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 967922c2-4b3a-421a-9f95-260261de4084
+    m_ActionName: PlayerMovement/LockOn[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8c40be12-c91d-40f5-bcda-105436231d58
+    m_ActionName: PlayerMovement/Run[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bbfbe23c-352a-4a6c-b4c2-8b290c6d40dc
+    m_ActionName: PlayerMovement/DestroyMode[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 520fa72d-ac3a-4ae8-af37-ac0f1999c0b6
+    m_ActionName: PlayerMovement/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9b91c218-5255-452d-a603-aabe6a4a7175
+    m_ActionName: PlayerMovement/ResourceCheat[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2137553846}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a1e2f9c3-bbca-4660-b0cf-0bb74d6197d2
+    m_ActionName: PlayerMovement/Pause[/Keyboard/escape]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: PlayerMovement
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &6704194890490276915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3023,6 +3119,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2137553847}
+    - targetCorrespondingSourceObject: {fileID: 2073502730369763878, guid: db07f7c605eec064681c41decc2bb237,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2137553848}
   m_SourcePrefab: {fileID: 100100000, guid: db07f7c605eec064681c41decc2bb237, type: 3}
 --- !u!1001 &8019533898944265302
 PrefabInstance:

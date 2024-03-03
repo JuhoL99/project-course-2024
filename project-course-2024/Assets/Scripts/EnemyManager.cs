@@ -17,7 +17,7 @@ public class EnemyManager : MonoBehaviour
     EnemyNavigation navigation;
     [SerializeField] private Animator enemyAnim;
     [SerializeField] private EnemyState state;
-    private bool hasSpawned = false;
+    //private bool hasSpawned = false;
     void Start()
     {
         navigation = GetComponent<EnemyNavigation>();

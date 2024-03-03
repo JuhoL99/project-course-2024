@@ -18,7 +18,6 @@ public class EnemyNavigation : MonoBehaviour
     private NavMeshAgent agent;
     private Rigidbody rb;
     private PlayerManager player;
-    private PlayerHealthManager playerHealthManager;
     private Vector3 mainGoal = Vector3.zero;
     [SerializeField] private GameObject egg;
     [SerializeField] private LayerMask layerToHit;
@@ -58,7 +57,6 @@ public class EnemyNavigation : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         player = PlayerManager.instance;
-        playerHealthManager = PlayerHealthManager.instance;
         egg = GameObject.FindWithTag("MainTarget");
         eggScript = egg.GetComponent<Egg>();
         mainGoal = egg.transform.position;
@@ -211,7 +209,6 @@ public class EnemyNavigation : MonoBehaviour
     {
         Destroy(gameObject, 4f);
         isDead = true;
-        playerHealthManager.TakeDamage(1);
         eggScript.ChangeHealth(-damageToEgg);
         return;
     }

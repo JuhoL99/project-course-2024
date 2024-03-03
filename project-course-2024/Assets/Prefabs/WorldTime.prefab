@@ -45,11 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bfedc2aa277b9f4ca5f9d87a06215c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTimeOfDay: 0
   currentTime: 0
   timeOfDay: 0
   daysPassed: 0
   timeFraction: 0
-  dayLength: 100
+  dayLength: 400
   hour: 0
   minute: 0
   second: 0

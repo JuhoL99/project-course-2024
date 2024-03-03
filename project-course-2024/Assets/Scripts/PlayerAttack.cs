@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private float lastInputTime;
-    private float comboTimer = 1f;
+    //private float lastInputTime;
+    //private float comboTimer = 1f;
     public bool isAttacking = false;
     [SerializeField] private string[] comboSteps;
     [SerializeField] private int currentComboPhase = 0;

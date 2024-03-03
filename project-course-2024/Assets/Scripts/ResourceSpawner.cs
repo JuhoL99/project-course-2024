@@ -29,7 +29,7 @@ public class ResourceSpawner : MonoBehaviour
         }
         timer = spawnInterval;
         radiusDiff = worldBorderRadius - spawnOutsideRadius;
-        resourceParent = GameObject.Find("Resources").transform;
+        resourceParent = transform;
         terrainLayer = 1 << LayerMask.NameToLayer("Terrain");
         tau = 2 * Mathf.PI;
 
@@ -39,8 +39,6 @@ public class ResourceSpawner : MonoBehaviour
         }
         worldResourceCount = startResourceCount;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (worldResourceCount >= maxResourceCount) return;
@@ -74,6 +72,5 @@ public class ResourceSpawner : MonoBehaviour
             Quaternion.Euler(0, Random.Range(0, 360f), 0), resourceParent.GetChild(randIndex));
         newResource.GetComponent<ResourceBeh>().spawnerScript = this;
         worldResourceCount++;
-
     }
 }

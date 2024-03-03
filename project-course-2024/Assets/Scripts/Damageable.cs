@@ -29,10 +29,10 @@ public class Damageable : MonoBehaviour
         }
 
     }
-    public void GetHitLoser()
+    public void GetHitLoser(float knockbackAmount)
     {
         TakeDamage();
-        navigationScript.KnockBack();
+        navigationScript.KnockBack(knockbackAmount);
         //Destroy(gameObject);
     }
     private void TakeDamage()

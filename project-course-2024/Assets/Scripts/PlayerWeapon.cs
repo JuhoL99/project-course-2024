@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerWeapon : MonoBehaviour
 {
     private Collider coll;
+    [SerializeField] private float knockBackAmount;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         
     }
-    public void EnableWeaponRight(bool value)
+    public void EnableWeapon(bool value)
     {
         coll.enabled = value;
         Debug.Log("Works");
@@ -31,7 +32,7 @@ public class PlayerWeapon : MonoBehaviour
             Debug.Log("ENEMY TRIGGERED");
             Damageable enemyScript = other.GetComponent<Damageable>();
             if(enemyScript != null)
-                enemyScript.GetHitLoser();
+                enemyScript.GetHitLoser(knockBackAmount);
         }
     }
 

@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
     {
         spawnPoint = new Vector3[numOfEnemies];
         spawnPoint[0] = spawnPointEmpty.transform.position;
-        spawnPoint[0].y = 0.5f;
+        spawnPoint[0].y = spawnPointEmpty.transform.position.y;
 
         float minDistance = 1f;
 
@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 Vector2 randomPointInCircle = Random.insideUnitCircle * spawnCircleRadius;
                 Vector3 candidatePoint = new Vector3(randomPointInCircle.x, 0, randomPointInCircle.y) + spawnPointEmpty.transform.position;
-                candidatePoint.y = 0.5f;
+                candidatePoint.y = spawnPointEmpty.transform.position.y;
                 validPoint = true;
 
                 foreach (Vector3 existingPoint in spawnPoint)

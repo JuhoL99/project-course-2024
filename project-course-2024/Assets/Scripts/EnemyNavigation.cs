@@ -22,6 +22,7 @@ public class EnemyNavigation : MonoBehaviour
     private Vector3 mainGoal = Vector3.zero;
     [SerializeField] private GameObject egg;
     [SerializeField] private LayerMask layerToHit;
+    [SerializeField] private Animator enemyAnim;
 
     [SerializeField] private GameObject currentObstacle;
 
@@ -39,11 +40,14 @@ public class EnemyNavigation : MonoBehaviour
     [SerializeField] private float playerAngle;
     [SerializeField] private float maxAngle = 120f;
     public float chaseDistance;
+    [SerializeField] private float attackRange;
 
     public Vector3 navmeshVel; //debug
     private Vector3 rbVel; //debug
     public Vector3 moveAmount;
     private bool isDead = false;
+    private bool isAttacking = false;
+    [SerializeField] private Collider weaponCollider;
 
     Egg eggScript;
     public int damageToEgg = 20;
@@ -63,6 +67,7 @@ public class EnemyNavigation : MonoBehaviour
     {
         if (knockBackEffect)
             return;
+        enemyAnim.SetBool("isMoving", !agent.isStopped);
         rb.velocity = Vector3.zero;
         navmeshVel = agent.velocity; //debug
         rbVel = rb.velocity;  //debug
@@ -74,15 +79,17 @@ public class EnemyNavigation : MonoBehaviour
         //remove rigidbody later?
         //if (!knockBackEffect) rb.velocity = Vector3.zero;
     }
-    public void KnockBack()
+    public void KnockBack(float knockBackAmount)
     {
-        StartCoroutine(KnockBackCoroutine());
+        StartCoroutine(KnockBackCoroutine(knockBackAmount));
     }
-    private IEnumerator KnockBackCoroutine()
+    private IEnumerator KnockBackCoroutine(float knockBackAmount)
     {
+        enemyAnim.Play("KnockBack");
+        //enemyAnim.Play("TakingDamage");
         agent.enabled = false;
         knockBackEffect = true;
-        rb.AddForce(player.transform.forward * 10, ForceMode.Impulse);
+        rb.AddForce(player.transform.forward * 5 * knockBackAmount, ForceMode.Impulse);
         yield return new WaitForSeconds(0.5f);
         agent.enabled = true; 
         knockBackEffect = false;
@@ -172,7 +179,7 @@ public class EnemyNavigation : MonoBehaviour
             if (timeStruct > timerStruct)
             {
                 timeStruct = 0;
-                //later: gate attack anim
+                enemyAnim.Play("Hit");
                 obstacle.TakeDamage(5);
             }
         }
@@ -190,6 +197,10 @@ public class EnemyNavigation : MonoBehaviour
         {
             agent.SetDestination(player.transform.position);
         }
+        if (playerDirection.magnitude < attackRange && !isAttacking)
+        {
+            StartCoroutine(AttackAnimation());
+        }
         //later: if player in attack range, initiate attack anim
         if (playerDirection.magnitude > chaseDistance)
         {
@@ -203,5 +214,15 @@ public class EnemyNavigation : MonoBehaviour
         playerHealthManager.TakeDamage(1);
         eggScript.ChangeHealth(-damageToEgg);
         return;
+    }
+    private IEnumerator AttackAnimation()
+    {
+        weaponCollider.enabled = true; agent.isStopped = true; isAttacking = true;
+        agent.speed = 1;
+        enemyAnim.Play("Hit2");
+        yield return new WaitForSeconds(enemyAnim.GetCurrentAnimatorStateInfo(0).length);
+        isAttacking = false; agent.isStopped = false; weaponCollider.enabled = false;
+        agent.speed = 2;
+        
     }
 }

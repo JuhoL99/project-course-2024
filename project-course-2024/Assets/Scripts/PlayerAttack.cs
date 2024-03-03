@@ -5,11 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
-    /*private int currentComboPhase = 0;
     private float lastInputTime;
     private float comboTimer = 1f;
-    private bool isAttacking;*/
-    [SerializeField] private AnimationClip[] comboSteps;
+    public bool isAttacking = false;
+    [SerializeField] private string[] comboSteps;
+    [SerializeField] private int currentComboPhase = 0;
     [SerializeField] private Animator playerAnim;
     BuildAWall builder;
     private Movement movementScript;
@@ -31,8 +31,17 @@ public class PlayerAttack : MonoBehaviour
     private void PerformAttack()
     {
         Debug.Log("test");
+        if (currentComboPhase > 2)
+        {
+            currentComboPhase = 0;
+        }
         movementScript.canMove = false;
-        playerAnim.Play("Hit1");
+        if(!isAttacking)
+        {
+            StartCoroutine(AttackAnimation());
+            currentComboPhase++;
+        }
+
         //if new attack within combo time, advance phase
         //Debug.Log(currentComboPhase);
         /*lastInputTime = Time.time;
@@ -67,5 +76,12 @@ public class PlayerAttack : MonoBehaviour
 
             }
         }*/
+    }
+    private IEnumerator AttackAnimation()
+    {
+        isAttacking = true;
+        playerAnim.Play(comboSteps[currentComboPhase]);
+        yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorStateInfo(0).length);
+        isAttacking = false;
     }
 }

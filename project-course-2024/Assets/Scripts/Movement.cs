@@ -9,8 +9,9 @@ public class Movement : MonoBehaviour
 {
     Transform cam;
     CharacterController cc;
-    //[SerializeField] GameObject playerObject;
-    //[SerializeField] private Animator anim;
+    [SerializeField] GameObject playerObject;
+    [SerializeField] private Animator anim;
+    private PlayerAttack attackScript;
 
     Vector2 input;
     public Vector2 moveDir2;
@@ -28,6 +29,7 @@ public class Movement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         cam = Camera.main.transform;
         cc = GetComponent<CharacterController>();
+        attackScript = GetComponent<PlayerAttack>();
     }
 
     void Update()
@@ -65,7 +67,7 @@ public class Movement : MonoBehaviour
         }
         float moveSpeed = baseMoveSpeed;
         if (running) moveSpeed *= runMultiplier;
-        if (!canMove) moveSpeed *= 0.2f;
+        //if (attackScript.isAttacking) moveSpeed *= 0.3f;
         moveDir3 *= moveSpeed;
         moveDir3.y = ySpeed;
         cc.Move(new Vector3(moveDir2.x*moveSpeed,ySpeed,moveDir2.y*moveSpeed)  * Time.deltaTime);

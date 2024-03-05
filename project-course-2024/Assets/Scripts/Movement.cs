@@ -26,6 +26,7 @@ public class Movement : MonoBehaviour
 
     [Min(0f)] public float baseMoveSpeed, runMultiplier, baseJumpHeight, playerGravity, terminalVelocity;
     [Range(0,1)] public float turnLerpSpeed;
+    float jumpSpeed, jumpTime;
 
     bool attacking;
 
@@ -33,6 +34,8 @@ public class Movement : MonoBehaviour
     public float attackLungeDistance = 1f;
     float attackMoveSpeed;
     float attackLungeAcceleration = 20;
+
+    bool jumping;
 
     void Awake()
     {
@@ -44,9 +47,13 @@ public class Movement : MonoBehaviour
         lockOnScript = GetComponent<LockOn>();
         camBehScript = GetComponent<CameraBeh>();
     }
+    private void Start()
+    {
+        jumpSpeed = Mathf.Sqrt(2 * playerGravity * baseJumpHeight);
+        jumpTime = 2 * jumpSpeed / playerGravity;
+    }
     void Update()
     {
-        print(canMoveDeprecated);
         UpdateHorizontalMoveDir();
         CCMove();
         AnimUpdate();
@@ -55,7 +62,7 @@ public class Movement : MonoBehaviour
     void AnimUpdate()
     {
         anim.SetBool("running", running);
-        if (running && walkInputting && !attacking)
+        if (running && walkInputting && !attacking && !jumping)
         {
             playerObject.transform.localRotation = Quaternion.Lerp(playerObject.transform.localRotation, 
                 (Quaternion.Euler(transform.localRotation.x - 30f, 
@@ -74,10 +81,15 @@ public class Movement : MonoBehaviour
         if (!cc.isGrounded)
         {
             ySpeed -= playerGravity * Time.deltaTime;
-        }
-        else if (!onGroundLastFrame && cc.isGrounded)
+        } else if (!jumping)
         {
             ySpeed = -0.01f;
+        }
+        
+        if (!onGroundLastFrame && cc.isGrounded && jumping)
+        {
+            jumping = false;
+            anim.SetTrigger("Landed");
         }
         Vector3 movementVector;
         if (attacking)
@@ -101,9 +113,8 @@ public class Movement : MonoBehaviour
             movementVector = new Vector3(moveDir2.x, 0, moveDir2.y) * moveSpeed;
         }
         movementVector.y = ySpeed;
-        print(movementVector);
-        cc.Move(movementVector*Time.deltaTime);
         onGroundLastFrame = cc.isGrounded;
+        cc.Move(movementVector*Time.deltaTime);
     }
     public void OnWalk(InputAction.CallbackContext ctx)
     {
@@ -117,11 +128,10 @@ public class Movement : MonoBehaviour
     }
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (!canMoveDeprecated) return;
-        print(cc.isGrounded);
-        if (!(ctx.performed && cc.isGrounded)) return;
-        anim.Play("Jump");
-        ySpeed = Mathf.Sqrt(2 * playerGravity * baseJumpHeight);
+        if (!(ctx.performed && cc.isGrounded)||jumping) return;
+        anim.SetTrigger("Jump");
+        ySpeed = jumpSpeed;
+        jumping = true;
     }
     public void OnRun(InputAction.CallbackContext ctx)
     {
@@ -131,20 +141,23 @@ public class Movement : MonoBehaviour
     {
         if (walkInputting)
         {
+            //Move direction
             float inputAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
             float camAngle = -cam.rotation.eulerAngles.y;
             float moveAngle = (inputAngle + camAngle) % 360;
             moveDir2 = new Vector2(Mathf.Cos(moveAngle * Mathf.Deg2Rad), Mathf.Sin(moveAngle * Mathf.Deg2Rad));
             moveDir3 = new Vector3(moveDir2.x, 0f, moveDir2.y);
-            if (lockOnScript.lockedOn && !running)
-            {
-                transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(transform.rotation.eulerAngles.y,
-                    camBehScript.lockOnAngle, turnLerpSpeed * 60f * Time.deltaTime), 0);
-            }
-            else if (!attacking)
+
+            //Rotation
+            if (!attacking)
             {
                 transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(transform.rotation.eulerAngles.y,
                     90 - moveAngle, turnLerpSpeed * 60f * Time.deltaTime), 0);
+            }
+            else if (lockOnScript.lockedOn)
+            {
+                transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(transform.rotation.eulerAngles.y,
+                     camBehScript.lockOnAngle, turnLerpSpeed * 60f * Time.deltaTime), 0);
             }
             
             anim.SetBool("isMoving", true);

@@ -14,6 +14,8 @@ public class LockOn : MonoBehaviour
     Animator anim;
     CameraBeh cameraScript;
     float lockOffRange;
+    public GameObject lockOnSpritePrefab;
+    GameObject lockOnSprite;
     void Start()
     {
         buildScript = GetComponent<BuildAWall>();
@@ -22,6 +24,8 @@ public class LockOn : MonoBehaviour
         cameraScript = GetComponent<CameraBeh>();
         lockOffRange = lockOnVolume.GetComponent<SphereCollider>().radius*1.4f;
         anim = GetComponent<Animator>();
+        lockOnSprite = Instantiate(lockOnSpritePrefab);
+        lockOnSprite.SetActive(false);
     }
 
     void Update()
@@ -53,12 +57,14 @@ public class LockOn : MonoBehaviour
         anim.SetBool("LockedOn",true);
         cameraScript.ActivateLockOn(target.transform);
         lockTarget = target.transform;
+        lockOnSprite = Instantiate(lockOnSpritePrefab, lockTarget);
     }
     void DeactivateLockOn()
     {
         cameraScript.DeactivateLockOn();
         lockedOn = false;
         anim.SetBool("LockedOn", false);
+        Destroy(lockOnSprite);
         lockTarget = null;
     }
     GameObject FindClosestEnemyToReticle()

@@ -50,6 +50,8 @@ public class EnemyNavigation : MonoBehaviour
 
     Egg eggScript;
     public int damageToEgg = 5;
+    bool hitSwitch;
+    private Coroutine currentHitSwitchTimer;
 
     private void Start()
     {
@@ -178,7 +180,7 @@ public class EnemyNavigation : MonoBehaviour
             if (timeStruct > timerStruct)
             {
                 timeStruct = 0;
-                enemyAnim.Play("Hit");
+                Hit();
                 obstacle.TakeDamage(5);
             }
         }
@@ -190,6 +192,18 @@ public class EnemyNavigation : MonoBehaviour
         }
 
     }
+    void Hit()
+    {
+        enemyAnim.Play(hitSwitch ? "Hit2" : "Hit");
+        hitSwitch = !hitSwitch;
+        if (currentHitSwitchTimer != null) StopCoroutine(currentHitSwitchTimer);
+        currentHitSwitchTimer = StartCoroutine("HitSwitchTimer");
+    }
+    IEnumerable HitSwitchTimer()
+    {
+        yield return new WaitForSeconds(5);
+        hitSwitch = false;
+    }
     public void ChasePlayer()
     {
         if (agent.enabled)
@@ -198,7 +212,7 @@ public class EnemyNavigation : MonoBehaviour
         }
         if (playerDirection.magnitude < attackRange && !isAttacking)
         {
-            StartCoroutine(AttackAnimation());
+            Attack();
         }
         //later: if player in attack range, initiate attack anim
         if (playerDirection.magnitude > chaseDistance)
@@ -213,14 +227,15 @@ public class EnemyNavigation : MonoBehaviour
         eggScript.ChangeHealth(-damageToEgg);
         return;
     }
-    private IEnumerator AttackAnimation()
+    void Attack()
     {
         weaponCollider.enabled = true; agent.isStopped = true; isAttacking = true;
         agent.speed = 1;
-        enemyAnim.Play("Hit2");
-        yield return new WaitForSeconds(enemyAnim.GetCurrentAnimatorStateInfo(0).length);
+        Hit();
+    }
+    public void AttackDone()
+    {
         isAttacking = false; agent.isStopped = false; weaponCollider.enabled = false;
         agent.speed = 2;
-        
     }
 }

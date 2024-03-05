@@ -125,6 +125,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""a1e2f9c3-bbca-4660-b0cf-0bb74d6197d2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -314,6 +323,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ResourceCheat"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9ab7935-c7f8-4ca4-896b-4f9d0db019f7"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -333,6 +353,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerMovement_DestroyMode = m_PlayerMovement.FindAction("DestroyMode", throwIfNotFound: true);
         m_PlayerMovement_Interact = m_PlayerMovement.FindAction("Interact", throwIfNotFound: true);
         m_PlayerMovement_ResourceCheat = m_PlayerMovement.FindAction("ResourceCheat", throwIfNotFound: true);
+        m_PlayerMovement_Pause = m_PlayerMovement.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -405,6 +426,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_DestroyMode;
     private readonly InputAction m_PlayerMovement_Interact;
     private readonly InputAction m_PlayerMovement_ResourceCheat;
+    private readonly InputAction m_PlayerMovement_Pause;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -420,6 +442,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @DestroyMode => m_Wrapper.m_PlayerMovement_DestroyMode;
         public InputAction @Interact => m_Wrapper.m_PlayerMovement_Interact;
         public InputAction @ResourceCheat => m_Wrapper.m_PlayerMovement_ResourceCheat;
+        public InputAction @Pause => m_Wrapper.m_PlayerMovement_Pause;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -462,6 +485,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ResourceCheat.started += instance.OnResourceCheat;
             @ResourceCheat.performed += instance.OnResourceCheat;
             @ResourceCheat.canceled += instance.OnResourceCheat;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -499,6 +525,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ResourceCheat.started -= instance.OnResourceCheat;
             @ResourceCheat.performed -= instance.OnResourceCheat;
             @ResourceCheat.canceled -= instance.OnResourceCheat;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -529,5 +558,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnDestroyMode(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnResourceCheat(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

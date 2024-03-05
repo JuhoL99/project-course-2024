@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EnemyWeapon : MonoBehaviour
 {
+    public int enemyAttackDamage;
     private Collider wCollider;
+
     void Start()
     {
         wCollider = GetComponent<Collider>();
@@ -15,9 +17,8 @@ public class EnemyWeapon : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             wCollider.enabled = false;
-            DamageablePlayer dmg = other.gameObject.GetComponent<DamageablePlayer>();
-            dmg.GetHitLoser();
-            Debug.Log("Hit player");
+            PlayerHealth playerHealthScript = other.gameObject.GetComponent<PlayerHealth>();
+            playerHealthScript.GetHitLoser(enemyAttackDamage);
         }
     }
 }

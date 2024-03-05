@@ -346,9 +346,37 @@ MonoBehaviour:
     m_ActionId: 520fa72d-ac3a-4ae8-af37-ac0f1999c0b6
     m_ActionName: PlayerMovement/Interact[/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2285330365003645000}
+        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
+        m_MethodName: OnResourceCheat
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 9b91c218-5255-452d-a603-aabe6a4a7175
     m_ActionName: PlayerMovement/ResourceCheat[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a1e2f9c3-bbca-4660-b0cf-0bb74d6197d2
+    m_ActionName: PlayerMovement/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement
@@ -375,7 +403,7 @@ MonoBehaviour:
   canMoveDeprecated: 1
   baseMoveSpeed: 4
   runMultiplier: 1.7
-  baseJumpHeight: 3
+  baseJumpHeight: 1.5
   playerGravity: 30
   terminalVelocity: 0
   turnLerpSpeed: 0.3
@@ -419,6 +447,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnRange: 20
+  lockOnSpritePrefab: {fileID: 2399103952885695774, guid: f65872342fcad194095253904b65ab49,
+    type: 3}
 --- !u!114 &2285330365003645000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,6 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 20
+  hotInterval: 6
 --- !u!95 &7038195397831351453
 Animator:
   serializedVersion: 5
@@ -780,6 +811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockBackAmount: 2
+  weaponDamage: 8
 --- !u!135 &7245943255044726920
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -868,6 +900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockBackAmount: 1
+  weaponDamage: 6
 --- !u!1 &6618095492168463036
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,6 +968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockBackAmount: 1
+  weaponDamage: 6
 --- !u!1001 &2515493236702034271
 PrefabInstance:
   m_ObjectHideFlags: 0

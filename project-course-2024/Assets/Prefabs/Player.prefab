@@ -403,7 +403,7 @@ MonoBehaviour:
   canMoveDeprecated: 1
   baseMoveSpeed: 4
   runMultiplier: 1.7
-  baseJumpHeight: 3
+  baseJumpHeight: 1.5
   playerGravity: 30
   terminalVelocity: 0
   turnLerpSpeed: 0.3
@@ -447,6 +447,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnRange: 20
+  lockOnSpritePrefab: {fileID: 2399103952885695774, guid: f65872342fcad194095253904b65ab49,
+    type: 3}
 --- !u!114 &2285330365003645000
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -115,10 +115,8 @@ public class Movement : MonoBehaviour
     }
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (!canMoveDeprecated) return;
-        print(cc.isGrounded);
         if (!(ctx.performed && cc.isGrounded)) return;
-        anim.Play("Jump");
+        anim.Play("Jump",0);
         ySpeed = Mathf.Sqrt(2 * playerGravity * baseJumpHeight);
     }
     public void OnRun(InputAction.CallbackContext ctx)
@@ -129,20 +127,23 @@ public class Movement : MonoBehaviour
     {
         if (walkInputting)
         {
+            //Move direction
             float inputAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
             float camAngle = -cam.rotation.eulerAngles.y;
             float moveAngle = (inputAngle + camAngle) % 360;
             moveDir2 = new Vector2(Mathf.Cos(moveAngle * Mathf.Deg2Rad), Mathf.Sin(moveAngle * Mathf.Deg2Rad));
             moveDir3 = new Vector3(moveDir2.x, 0f, moveDir2.y);
-            if (lockOnScript.lockedOn && !running)
-            {
-                transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(transform.rotation.eulerAngles.y,
-                    camBehScript.lockOnAngle, turnLerpSpeed * 60f * Time.deltaTime), 0);
-            }
-            else if (!attacking)
+
+            //Rotation
+            if (!attacking)
             {
                 transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(transform.rotation.eulerAngles.y,
                     90 - moveAngle, turnLerpSpeed * 60f * Time.deltaTime), 0);
+            }
+            else if (lockOnScript.lockedOn)
+            {
+                transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(transform.rotation.eulerAngles.y,
+                     camBehScript.lockOnAngle, turnLerpSpeed * 60f * Time.deltaTime), 0);
             }
             
             anim.SetBool("isMoving", true);

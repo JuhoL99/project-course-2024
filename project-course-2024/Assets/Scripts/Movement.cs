@@ -88,8 +88,6 @@ public class Movement : MonoBehaviour
         
         if (!onGroundLastFrame && cc.isGrounded && jumping)
         {
-            print("Landed");
-            //ySpeed = -0.01f;
             jumping = false;
             anim.SetTrigger("Landed");
         }
@@ -132,16 +130,7 @@ public class Movement : MonoBehaviour
     {
         if (!(ctx.performed && cc.isGrounded)||jumping) return;
         anim.SetTrigger("Jump");
-
         ySpeed = jumpSpeed;
-        
-        print(jumpTime);
-        print(anim.GetCurrentAnimatorClipInfo(0).Length);
-        //anim.speed = 0.7f;
-        //0.39
-        //
-        print(anim.speed);
-
         jumping = true;
     }
     public void OnRun(InputAction.CallbackContext ctx)

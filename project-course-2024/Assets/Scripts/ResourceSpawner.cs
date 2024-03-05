@@ -67,8 +67,8 @@ public class ResourceSpawner : MonoBehaviour
         }
         GameObject chosenPrefab = resourcePrefabs[randIndex];
         GameObject newResource = Instantiate(chosenPrefab,
-            new Vector3(xz.x, terrainHeight + chosenPrefab.transform.localScale.y / 2, xz.y),
-            Quaternion.Euler(0, Random.Range(0, 360f), 0), resourceParent.GetChild(randIndex));
+            new Vector3(xz.x, terrainHeight, xz.y), // + chosenPrefab.transform.localScale.y / 2
+            Quaternion.Euler(-90, Random.Range(0, 360f), 0), resourceParent.GetChild(randIndex)); //-90 since 
         newResource.GetComponent<ResourceBeh>().spawnerScript = this;
         worldResourceCount++;
     }

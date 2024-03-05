@@ -665,6 +665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db179c0914e6a7940a141f4baf986b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyAttackDamage: 2
 --- !u!4 &6588159944686007788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dcf73e5dcc9be4041ab5e66f16099128,

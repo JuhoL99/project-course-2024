@@ -499,6 +499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 20
+  hotInterval: 6
 --- !u!95 &7038195397831351453
 Animator:
   serializedVersion: 5

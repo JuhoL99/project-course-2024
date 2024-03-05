@@ -45,7 +45,6 @@ public class EnemyManager : MonoBehaviour
         enemyAnim.Play("Summon");
         var stateInfo = enemyAnim.GetCurrentAnimatorStateInfo(0);
         yield return new WaitForSeconds(stateInfo.length/stateInfo.speed);
-        print("PGOEFASIJ");
         State = EnemyState.MainGoal;
     }
     private void StateChange()

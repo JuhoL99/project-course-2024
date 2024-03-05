@@ -26,6 +26,7 @@ public class Movement : MonoBehaviour
 
     [Min(0f)] public float baseMoveSpeed, runMultiplier, baseJumpHeight, playerGravity, terminalVelocity;
     [Range(0,1)] public float turnLerpSpeed;
+    float jumpSpeed, jumpTime;
 
     bool attacking;
 
@@ -33,6 +34,8 @@ public class Movement : MonoBehaviour
     public float attackLungeDistance = 1f;
     float attackMoveSpeed;
     float attackLungeAcceleration = 20;
+
+    bool jumping;
 
     void Awake()
     {
@@ -44,6 +47,11 @@ public class Movement : MonoBehaviour
         lockOnScript = GetComponent<LockOn>();
         camBehScript = GetComponent<CameraBeh>();
     }
+    private void Start()
+    {
+        jumpSpeed = Mathf.Sqrt(2 * playerGravity * baseJumpHeight);
+        jumpTime = 2 * jumpSpeed / playerGravity;
+    }
     void Update()
     {
         UpdateHorizontalMoveDir();
@@ -54,7 +62,7 @@ public class Movement : MonoBehaviour
     void AnimUpdate()
     {
         anim.SetBool("running", running);
-        if (running && walkInputting && !attacking)
+        if (running && walkInputting && !attacking && !jumping)
         {
             playerObject.transform.localRotation = Quaternion.Lerp(playerObject.transform.localRotation, 
                 (Quaternion.Euler(transform.localRotation.x - 30f, 
@@ -73,10 +81,17 @@ public class Movement : MonoBehaviour
         if (!cc.isGrounded)
         {
             ySpeed -= playerGravity * Time.deltaTime;
-        }
-        else if (!onGroundLastFrame && cc.isGrounded)
+        } else if (!jumping)
         {
             ySpeed = -0.01f;
+        }
+        
+        if (!onGroundLastFrame && cc.isGrounded && jumping)
+        {
+            print("Landed");
+            //ySpeed = -0.01f;
+            jumping = false;
+            anim.SetTrigger("Landed");
         }
         Vector3 movementVector;
         if (attacking)
@@ -100,8 +115,8 @@ public class Movement : MonoBehaviour
             movementVector = new Vector3(moveDir2.x, 0, moveDir2.y) * moveSpeed;
         }
         movementVector.y = ySpeed;
-        cc.Move(movementVector*Time.deltaTime);
         onGroundLastFrame = cc.isGrounded;
+        cc.Move(movementVector*Time.deltaTime);
     }
     public void OnWalk(InputAction.CallbackContext ctx)
     {
@@ -115,9 +130,19 @@ public class Movement : MonoBehaviour
     }
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (!(ctx.performed && cc.isGrounded)) return;
-        anim.Play("Jump",0);
-        ySpeed = Mathf.Sqrt(2 * playerGravity * baseJumpHeight);
+        if (!(ctx.performed && cc.isGrounded)||jumping) return;
+        anim.SetTrigger("Jump");
+
+        ySpeed = jumpSpeed;
+        
+        print(jumpTime);
+        print(anim.GetCurrentAnimatorClipInfo(0).Length);
+        //anim.speed = 0.7f;
+        //0.39
+        //
+        print(anim.speed);
+
+        jumping = true;
     }
     public void OnRun(InputAction.CallbackContext ctx)
     {

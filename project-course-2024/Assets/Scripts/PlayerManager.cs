@@ -43,4 +43,13 @@ public class PlayerManager : MonoBehaviour
         }
         print(currentResources.ToCommaSeparatedString());
     }
+    public int GetResourceAmount(string resourceName)
+    {
+        if(nameToResourceNum.ContainsKey(resourceName))
+        {
+            int n = nameToResourceNum[resourceName];
+            return currentResources[n];
+        }
+        return -1;
+    }
 }

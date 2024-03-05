@@ -49,7 +49,7 @@ public class EnemyNavigation : MonoBehaviour
     [SerializeField] private Collider weaponCollider;
 
     Egg eggScript;
-    public int damageToEgg = 20;
+    public int damageToEgg = 5;
 
     private void Start()
     {
@@ -118,7 +118,8 @@ public class EnemyNavigation : MonoBehaviour
             agent.SetDestination(mainGoal);
             CheckObstacles();
             float distance = Vector3.Distance(transform.position, mainGoal);
-            if(distance < 1.5 && !isDead)
+            Debug.Log(distance);
+            if(distance < 3 && !isDead)
             {
                 DamageEggAndDie();
             }
@@ -207,7 +208,7 @@ public class EnemyNavigation : MonoBehaviour
     }
     void DamageEggAndDie()
     {
-        Destroy(gameObject, 4f);
+        Destroy(gameObject, 1f);
         isDead = true;
         eggScript.ChangeHealth(-damageToEgg);
         return;

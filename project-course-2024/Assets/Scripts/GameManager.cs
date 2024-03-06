@@ -21,6 +21,11 @@ public class GameManager : MonoBehaviour
     }
     public void LoadScene(int sceneToLoadIndex)
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(sceneToLoadIndex);
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

@@ -42,7 +42,6 @@ public class Damageable : MonoBehaviour
         if(health <= 0)
         {
             Destroy(gameObject);
-            print("Destroyed");
         }
     }
 }

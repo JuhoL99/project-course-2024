@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 public class SpeedCurve : StateMachineBehaviour

@@ -18,6 +18,10 @@ public class Healthbar : MonoBehaviour
     public void UpdateValue(float newValue)
     {
         value = newValue;
-        fill.localScale = new Vector3(newValue, 1, 1);
+        if(fill != null)
+        {
+            fill.localScale = new Vector3(value, 1, 1);
+        }
+        
     }
 }

@@ -8,6 +8,7 @@ public class Egg : MonoBehaviour, InteractInterface
 {
     [SerializeField] private Healthbar slider;
     [SerializeField] int health = 100;
+    [SerializeField] private FadeController fadeController;
     public int maxHealth = 100;
     public float hungerInterval;
     float hungerTimer;
@@ -63,6 +64,6 @@ public class Egg : MonoBehaviour, InteractInterface
     }
     void Death()
     {
-        print("Game Over");
+        fadeController.StartFade();
     }
 }

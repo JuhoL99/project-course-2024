@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public float hotInterval; // hot = heal over time
     float hotTimer;
     [SerializeField] private Healthbar hpBar;
+    [SerializeField] private FadeController fadeController;
     private void Start()
     {
         health = maxHealth;
@@ -40,6 +41,10 @@ public class PlayerHealth : MonoBehaviour
         health = Mathf.Clamp(health,0,maxHealth);
         //Change UI
         if (health <= 0)
+        {
+            fadeController.StartFade();
             Destroy(gameObject);
+        }
+            
     }
 }

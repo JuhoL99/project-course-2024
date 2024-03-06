@@ -8211,11 +8211,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPointEmpty: {fileID: 8602088603452364583}
-  enemyPrefab: {fileID: 652076148235760732, guid: 6455a6bf736592740a311bf2ddd59485,
+  enemyPrefab: {fileID: 7587507684212155431, guid: 310672a5fbf57634f8cd424835448c4c,
     type: 3}
   spawnPoint: []
   spawnCircleRadius: 4
-  numOfEnemies: 5
+  numOfEnemies: 8
 --- !u!114 &8358704286072912603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8228,6 +8228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71346305ed835ce459be1c8ae250c387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemiesToSpawn: 50
   worldTime: {fileID: 0}
   spawnRate: 0
 --- !u!1 &8998917255374729425

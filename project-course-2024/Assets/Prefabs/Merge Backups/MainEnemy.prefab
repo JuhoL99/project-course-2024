@@ -403,7 +403,7 @@ MonoBehaviour:
   navmeshVel: {x: 0, y: 0, z: 0}
   moveAmount: {x: 0, y: 0, z: 0}
   weaponCollider: {fileID: 1340966484893446135}
-  damageToEgg: 20
+  damageToEgg: 5
 --- !u!114 &6174960625620470297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,6 +659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db179c0914e6a7940a141f4baf986b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyAttackDamage: 1
 --- !u!4 &679440813534997999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dcf73e5dcc9be4041ab5e66f16099128,

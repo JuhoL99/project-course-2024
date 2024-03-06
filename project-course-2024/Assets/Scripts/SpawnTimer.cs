@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpawnTimer : MonoBehaviour
 {
     private EnemySpawner spawner;
-    private int enemiesToSpawn = 30;
+    [SerializeField] private int enemiesToSpawn = 30;
     public WorldTime worldTime;
     private float spawnTimer;
     private float time = 0;
@@ -17,7 +17,7 @@ public class SpawnTimer : MonoBehaviour
     {
         spawner = GetComponent<EnemySpawner>();
         worldTime = WorldTime.instance;
-        spawnRate = (worldTime.dayLength*12/24) / (enemiesToSpawn / 5);
+        spawnRate = (worldTime.dayLength*12/24) / (enemiesToSpawn / 8);
         spawnTimer = spawnRate;
     }
 

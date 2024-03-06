@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 20;
     public float hotInterval; // hot = heal over time
     float hotTimer;
+    [SerializeField] private Healthbar hpBar;
     private void Start()
     {
         health = maxHealth;
@@ -16,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         HealOverTime();
+        hpBar.UpdateValue(health / (float)maxHealth);
     }
     void HealOverTime()
     {

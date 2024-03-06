@@ -12,7 +12,7 @@ public class ResourceBeh : MonoBehaviour, InteractInterface
     public void GetInteracted(GameObject player)
     {
         PlayerManager manager = player.GetComponent<PlayerManager>();
-        manager.currentResources[manager.nameToResourceNum[resourceName]]++;
+        manager.currentResources[manager.nameToResourceNum[resourceName]]+=10;
         print(manager.currentResources.ToCommaSeparatedString());
         player.GetComponentInChildren<InteractVolume>().RemoveInteractableFromRange(gameObject);
         spawnerScript.worldResourceCount--;

@@ -12,6 +12,7 @@ public class Egg : MonoBehaviour, InteractInterface
     public int maxHealth = 100;
     public float hungerInterval;
     float hungerTimer;
+    private bool isDead;
     void Start()
     {
         slider.UpdateValue(1);
@@ -57,13 +58,14 @@ public class Egg : MonoBehaviour, InteractInterface
         health += amount;
         health = Mathf.Clamp(health, 0, maxHealth);
         slider.UpdateValue(health/(float)maxHealth);
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
             Death();
         }
     }
     void Death()
     {
+        isDead = true;
         fadeController.StartFade();
     }
 }

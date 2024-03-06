@@ -4,26 +4,33 @@ using UnityEngine;
 
 public class ResetMeleeColliderLeft : StateMachineBehaviour
 {
-
+    public float resetPercent;
+    bool colliderReset;
     //nStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerWeapon fist = GameObject.FindWithTag("FistLeft").GetComponent<PlayerWeapon>();
         fist.EnableWeapon(true);
-
+        colliderReset = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (!colliderReset && stateInfo.normalizedTime > resetPercent)
+        {
+            colliderReset = true;
+            PlayerWeapon fist = GameObject.FindWithTag("FistLeft").GetComponent<PlayerWeapon>();
+            fist.EnableWeapon(false);
+            Debug.Log("resetLeft");
+
+        }
+    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerWeapon fist = GameObject.FindWithTag("FistLeft").GetComponent<PlayerWeapon>();
-        fist.EnableWeapon(false);
+        
         /*GameObject playerObject = GameObject.Find("Player");
         if (playerObject != null)
         {

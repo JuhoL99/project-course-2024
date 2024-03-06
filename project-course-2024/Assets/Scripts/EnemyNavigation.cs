@@ -120,7 +120,6 @@ public class EnemyNavigation : MonoBehaviour
             agent.SetDestination(mainGoal);
             CheckObstacles();
             float distance = Vector3.Distance(transform.position, mainGoal);
-            Debug.Log(distance);
             if(distance < 3 && !isDead)
             {
                 DamageEggAndDie();

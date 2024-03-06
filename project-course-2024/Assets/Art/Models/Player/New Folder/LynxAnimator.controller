@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c638a8d840d3a841943481369ee7961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetPercent: 0.8
 --- !u!114 &-6500910145458333181
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -614,49 +615,49 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: running
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: AttackSpeed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: CanCancelToNextHit
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: LockedOn
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Jump
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Landed
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -928,6 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567138e23d716e643ae1271a30f49666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetPercent: 0.8
 --- !u!114 &4602384046600138477
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -953,6 +955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6267929e18046e949841687d5adcf434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetPercent: 0.57
 --- !u!1102 &5087492788206010221
 AnimatorState:
   serializedVersion: 6
